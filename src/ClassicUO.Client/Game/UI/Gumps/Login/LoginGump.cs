@@ -81,17 +81,7 @@ namespace ClassicUO.Game.UI.Gumps.Login
                 //UO Flag
                 Add(new GumpPic(0, 4, 0x15A0, 0) { AcceptKeyboardInput = false });
 
-                // Quit Button
-                Add
-                (
-                    new Button((int)Buttons.Quit, 0x1589, 0x158B, 0x158A)
-                    {
-                        X = 555,
-                        Y = 4,
-                        ButtonAction = ButtonAction.Activate
-                    }
-                );
-
+                
                 //Login Panel
                 Add
                 (
@@ -120,21 +110,21 @@ namespace ClassicUO.Game.UI.Gumps.Login
                     }
                 );
 
-                Add
+                /*Add
                 (
                     new Label(ResGumps.LoginToUO, false, HUE, font: 2)
                     {
                         X = 253,
-                        Y = 305
+                        Y = 290
                     }
                 );
-
+                */
                 Add
                 (
                     new Label(ResGumps.Account, false, HUE, font: 2)
                     {
-                        X = 183,
-                        Y = 345
+                        X = 260,
+                        Y = 300
                     }
                 );
 
@@ -142,8 +132,8 @@ namespace ClassicUO.Game.UI.Gumps.Login
                 (
                     new Label(ResGumps.Password, false, HUE, font: 2)
                     {
-                        X = 183,
-                        Y = 385
+                        X = 260,
+                        Y = 360
                     }
                 );
 
@@ -163,20 +153,22 @@ namespace ClassicUO.Game.UI.Gumps.Login
                 offsetY = 343;
                 offtextY = 40;
 
+                /*
                 Add
                 (
                     new Label($"UO Version {Settings.GlobalSettings.ClientVersion}.", false, 0x034E, font: 9)
                     {
-                        X = 286,
+                        X = 256,
                         Y = 453
                     }
                 );
+                */
 
                 Add
                 (
-                    new Label(string.Format("TazUO Version {0}", CUOEnviroment.Version), false, 0x034E, font: 9)
+                    new Label(string.Format("UOLastHera Build {0}", CUOEnviroment.Version), false, 0x034E, font: 9)
                     {
-                        X = 286,
+                        X = 256,
                         Y = 465
                     }
                 );
@@ -188,13 +180,14 @@ namespace ClassicUO.Game.UI.Gumps.Login
                     (
                         0x00D2,
                         0x00D3,
-                        ResGumps.Autologin,
+                        "Auto",
+                        //ResGumps.Autologin,
                         1,
                         0x0386,
                         false
                     )
                     {
-                        X = 150,
+                        X = 270,
                         Y = 417
                     }
                 );
@@ -205,7 +198,8 @@ namespace ClassicUO.Game.UI.Gumps.Login
                     (
                         0x00D2,
                         0x00D3,
-                        ResGumps.SaveAccount,
+                        "Save",
+                        //ResGumps.SaveAccount,
                         1,
                         0x0386,
                         false
@@ -225,6 +219,8 @@ namespace ClassicUO.Game.UI.Gumps.Login
                 _buttonOver = 0x5CB;
 
                 Add(new GumpPic(0, 0, 0x014E, 0));
+
+               
 
                 //// Quit Button
                 Add
@@ -322,25 +318,25 @@ namespace ClassicUO.Game.UI.Gumps.Login
             }
 
 
-            // Account Text Input Background
+            // Entry Account Text Input Background
             Add
             (
                 new ResizePic(0x0BB8)
                 {
-                    X = offsetX,
-                    Y = offsetY,
+                    X = 260,
+                    Y = 320,
                     Width = 210,
                     Height = 30
                 }
             );
 
-            // Password Text Input Background
+            // Entry Password Text Input Background
             Add
             (
                 new ResizePic(0x0BB8)
                 {
-                    X = offsetX,
-                    Y = offsetY + offtextY,
+                    X = 260,
+                    Y = 380,
                     Width = 210,
                     Height = 30
                 }
@@ -360,8 +356,8 @@ namespace ClassicUO.Game.UI.Gumps.Login
                     hue: 0x034F
                 )
                 {
-                    X = offsetX,
-                    Y = offsetY,
+                    X = 267,
+                    Y = 320,
                     Width = 190,
                     Height = 25
                 }
@@ -380,8 +376,8 @@ namespace ClassicUO.Game.UI.Gumps.Login
                     hue: 0x034F
                 )
                 {
-                    X = offsetX,
-                    Y = offsetY + offtextY + 2,
+                    X = 267,
+                    Y = 380,
                     Width = 190,
                     Height = 25
                 }
@@ -405,7 +401,7 @@ namespace ClassicUO.Game.UI.Gumps.Login
             _checkboxAutologin.IsChecked = Settings.GlobalSettings.AutoLogin;
 
 
-            Add
+            /*Add
             (
                 new HtmlControl
                 (
@@ -423,8 +419,9 @@ namespace ClassicUO.Game.UI.Gumps.Login
                     style: FontStyle.BlackBorder
                 )
             );
+            */
 
-
+            /*
             Add
             (
                 new HtmlControl
@@ -443,7 +440,8 @@ namespace ClassicUO.Game.UI.Gumps.Login
                     style: FontStyle.BlackBorder
                 )
             );
-
+            */
+            /*
             Add
             (
                 new HtmlControl
@@ -462,17 +460,47 @@ namespace ClassicUO.Game.UI.Gumps.Login
                     style: FontStyle.BlackBorder
                 )
             );
+            */
+
+            ///Discord Button
+            Add
+            (
+                new Button((int)Buttons.Discord, 0x157D, 0x157E, 0x157F)
+                {
+                    X = 15,
+                    Y = 15,                    
+                }
+
+            );
+
+            HitBox hitbox;
+            Add(hitbox = new HitBox(15, 15, 59, 59, "Join UO Last Hera Discord", 0.15f));
+            hitbox.MouseUp += (s, e) =>
+            {
+                Utility.Platforms.PlatformHelper.LaunchBrowser("https://discord.gg/eUyZ3Vnm");
+            };
+
+
+            //TazUO Wiki
 
             TextBox _;
             HitBox _hit;
-            Add(_ = new TextBox("TazUO Wiki", TrueTypeLoader.EMBEDDED_FONT, 15, 200, Color.Orange, strokeEffect: false) { X = 30, Y = 440, AcceptMouseInput = true });
+            Add(_ = new TextBox("TazUO Wiki", TrueTypeLoader.EMBEDDED_FONT, 15, 200, Color.Orange, strokeEffect: false) { X = 30, Y = 420, AcceptMouseInput = true });
             Add(_hit = new HitBox(_.X, _.Y, _.MeasuredSize.X, _.MeasuredSize.Y));
             _hit.MouseUp += (s, e) =>
             {
                 Utility.Platforms.PlatformHelper.LaunchBrowser("https://github.com/bittiez/ClassicUO/wiki");
             };
 
-            
+            //Visit UO Last Hera
+            TextBox _text;
+            HitBox _hit1;
+            Add(_text= new TextBox("UO Last Hera", TrueTypeLoader.EMBEDDED_FONT, 15, 200, Color.Orange, strokeEffect: false) { X = 30, Y = 440, AcceptMouseInput = true });
+            Add(_hit1 = new HitBox(_text.X, _text.Y, _text.MeasuredSize.X, _text.MeasuredSize.Y));
+            _hit1.MouseUp += (s, e) =>
+            {
+                Utility.Platforms.PlatformHelper.LaunchBrowser("https://uolasthera.com");
+            };
 
             Checkbox loginmusic_checkbox = new Checkbox
             (
@@ -512,7 +540,7 @@ namespace ClassicUO.Game.UI.Gumps.Login
             loginmusic_checkbox.ValueChanged += (sender, e) =>
             {
                 Settings.GlobalSettings.LoginMusic = loginmusic_checkbox.IsChecked;
-                Client.Game.Audio.UpdateCurrentMusicVolume(true);
+                Client.Game.Audio.UpdateCurrentMusicVolume(false);
 
                 login_music.IsVisible = Settings.GlobalSettings.LoginMusic;
             };
@@ -533,6 +561,7 @@ namespace ClassicUO.Game.UI.Gumps.Login
                 _textboxAccount.SetKeyboardFocus();
             }
 
+            /*
             _ = new TextBox("A new version of TazUO is available!\n Click to open the download page.", TrueTypeLoader.EMBEDDED_FONT, 20, 300, Color.Yellow, strokeEffect: false) { X = 10, Y = 10, AcceptMouseInput = false };
             Add(_hit = new HitBox(_.X, _.Y, _.MeasuredSize.X, _.MeasuredSize.Y));
             _hit.MouseUp += (s, e) =>
@@ -558,6 +587,7 @@ namespace ClassicUO.Game.UI.Gumps.Login
                     }
                 };
             }
+            */
 
         }
 
@@ -642,6 +672,7 @@ namespace ClassicUO.Game.UI.Gumps.Login
                     UIManager.Add(new CreditsGump());
 
                     break;
+                               
             }
         }
 
@@ -803,7 +834,8 @@ namespace ClassicUO.Game.UI.Gumps.Login
         {
             NextArrow,
             Quit,
-            Credits
+            Credits,
+            Discord
         }
     }
 }
