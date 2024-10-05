@@ -241,7 +241,6 @@ namespace ClassicUO.Network
 
             var writer = new StackDataWriter(length < 0 ? 64 : length);
             writer.WriteUInt8(ID);
-
             if (length < 0)
             {
                 writer.WriteZero(2);
@@ -254,7 +253,7 @@ namespace ClassicUO.Network
             if (length < 0)
             {
                 writer.Seek(1, SeekOrigin.Begin);
-                writer.WriteUInt16BE((ushort) writer.BytesWritten);
+                writer.WriteUInt16BE((ushort)writer.BytesWritten);
             }
             else
             {
@@ -262,8 +261,13 @@ namespace ClassicUO.Network
             }
 
             socket.Send(writer.BufferWritten);
-
             writer.Dispose();
+
+            var customWriter = new StackDataWriter(64);
+            customWriter.WriteUInt8(0x99);
+            customWriter.WriteASCII("TAZUO_LASTH", 16);
+            socket.Send(customWriter.BufferWritten);
+            customWriter.Dispose();
         }
 
         public static void Send_SelectServer(this NetClient socket, byte index)

@@ -84,8 +84,8 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 1
             );
 
-            Add(new GumpPic(280, 53, 0x0709, 0), 1);
-            Add(new GumpPic(240, 73, 0x070A, 0), 1);
+            Add(new GumpPic(280, 53, 0x0709, 0), 1); //1801 character name
+            Add(new GumpPic(240, 73, 0x070A, 0), 1); //1802-03(70C)-04 entry name char
 
             Add
             (
@@ -101,7 +101,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             );
 
             Add(new GumpPic(463, 73, 0x070C, 0), 1);
-            Add(new GumpPic(238, 98, 0x0708, 0), 1);
+            Add(new GumpPic(238, 98, 0x0708, 0), 1);//1800 - tabernacolo
 
             Add
             (
@@ -203,7 +203,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 },
                 1
             );
-
+            //aggiungere orco
             if (Client.Version >= ClientVersion.CV_60144)
             {
                 Add
@@ -228,7 +228,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             // Prev/Next
             Add
             (
-                new Button((int) Buttons.Prev, 0x15A1, 0x15A3, 0x15A2)
+                new Button((int) Buttons.Prev, 0x15A1, 0x15A3, 0x15A2) //5537 +2 nrm,prs,act
                 {
                     X = 586, Y = 445, ButtonAction = ButtonAction.Activate
                 },
@@ -239,7 +239,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 _nextButton = new Button((int) Buttons.Next, 0x15A4, 0x15A6, 0x15A5)
                 {
-                    X = 610, Y = 445, ButtonAction = ButtonAction.Activate
+                    X = 610, Y = 445, ButtonAction = ButtonAction.Activate //5540 +2 nrm,prs,act
                 },
                 1
             );
@@ -325,6 +325,8 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                     _character.PushToBack(it);
 
                     break;
+
+                //aggiungere orco
 
                 default:
 

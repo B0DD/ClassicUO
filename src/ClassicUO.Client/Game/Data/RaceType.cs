@@ -37,5 +37,6 @@ namespace ClassicUO.Game.Data
         HUMAN = 1,
         ELF,
         GARGOYLE
+        //@todo aggiungere orco
     }
 }
