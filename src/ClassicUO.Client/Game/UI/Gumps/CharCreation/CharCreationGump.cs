@@ -224,8 +224,8 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
         private enum CharCreationStep
         {
             Appearence = 0,
-            ChooseProfession = 1,
-            ChooseTrade = 2,
+            ChooseProfession = 1, //classe
+            ChooseTrade = 2,      //transfer
             ChooseCity = 3
         }
     }

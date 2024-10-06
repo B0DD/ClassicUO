@@ -55,7 +55,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
         private PlayerMobile _character;
         private CharacterInfo _characterInfo;
-        private readonly Button _humanRadio, _elfRadio, _gargoyleRadio;
+        private readonly Button _humanRadio, _elfRadio, _orcRadio, _gargoyleRadio;
         private readonly Button _maleRadio, _femaleRadio;
         private Combobox _hairCombobox, _facialCombobox;
         private Label _hairLabel, _facialLabel;
@@ -112,7 +112,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 1
             );
 
-            // Male/Female Radios
+            // Male - Female Radio
             Add
             (
                 _maleRadio = new Button((int)Buttons.MaleButton, 0x0768, 0x0767)
@@ -130,7 +130,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 },
                 1
             );
-
+            
             Add
             (
                 new Button((int) Buttons.MaleButton, 0x0710, 0x0712, 0x0711)
@@ -168,6 +168,8 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             );
 
             // Races
+
+            //Human
             Add
             (
                 _humanRadio = new Button((int)Buttons.HumanButton, 0x0768, 0x0767)
@@ -186,6 +188,8 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 1
             );
 
+            //Elf
+
             Add
             (
                 _elfRadio = new Button((int)Buttons.ElfButton, 0x0768, 0x0767, 0x0768)
@@ -203,7 +207,27 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 },
                 1
             );
-            //aggiungere orco
+
+            //Orc
+
+            Add
+           (
+               _orcRadio = new Button((int)Buttons.OrcButton, 0x0768, 0x0767, 0x0768)
+               {
+                   X = 60, Y = 435, ButtonAction = ButtonAction.Activate
+               },
+               1
+           );
+
+            Add
+            (
+                new Button((int)Buttons.OrcButton, 0x07D3, 0x07D5, 0x07D4)
+                {
+                    X = 80, Y = 435, ButtonAction = ButtonAction.Activate
+                },
+                1
+            );
+
             if (Client.Version >= ClientVersion.CV_60144)
             {
                 Add
@@ -326,7 +350,36 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
                     break;
 
-                //aggiungere orco
+
+                case RaceType.ORC when isFemale:
+                    _character.Graphic = 0x029B;
+                    it = CreateItem(0x1710, 0x0384, Layer.Shoes);
+                    _character.PushToBack(it);
+
+                    it = CreateItem(0x1531, CurrentColorOption[Layer.Pants].Item2, Layer.Skirt);
+
+                    _character.PushToBack(it);
+
+                    it = CreateItem(0x1518, CurrentColorOption[Layer.Shirt].Item2, Layer.Shirt);
+
+                    _character.PushToBack(it);
+
+                    break;
+
+                case RaceType.ORC:
+                    _character.Graphic = 0x029A;
+                    it = CreateItem(0x1710, 0x0384, Layer.Shoes);
+                    _character.PushToBack(it);
+
+                    it = CreateItem(0x152F, CurrentColorOption[Layer.Pants].Item2, Layer.Pants);
+
+                    _character.PushToBack(it);
+
+                    it = CreateItem(0x1518, CurrentColorOption[Layer.Shirt].Item2, Layer.Shirt);
+
+                    _character.PushToBack(it);
+
+                    break;
 
                 default:
 
@@ -573,6 +626,39 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 pallet.Length >> 3
             );
 
+
+            // Hair
+            pallet = CharacterCreationValues.GetHairPallet(race);
+
+            AddCustomColorPicker
+            (
+                489,
+                267,
+                pallet,
+                Layer.Hair,
+                race == RaceType.ORC ? 1112322 : 3000184,
+                8,
+                pallet.Length >> 3
+            );
+
+            if (!_characterInfo.IsFemale && race != RaceType.ORC)
+            {
+                // Facial
+                pallet = CharacterCreationValues.GetHairPallet(race);
+
+                AddCustomColorPicker
+                (
+                    489,
+                    309,
+                    pallet,
+                    Layer.Beard,
+                    race == RaceType.ORC ? 1112512 : 3000446,
+                    8,
+                    pallet.Length >> 3
+                );
+            }
+
+
             if (!_characterInfo.IsFemale && race != RaceType.ELF)
             {
                 // Facial
@@ -727,6 +813,8 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                     if (!_humanRadio.IsClicked)
                     {
                         _humanRadio.IsClicked = true;
+                        _elfRadio.IsClicked = false;
+                        _orcRadio.IsClicked = false;
 
                         if (_elfRadio != null)
                         {
@@ -751,6 +839,27 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                     {
                         _elfRadio.IsClicked = true;
                         _humanRadio.IsClicked = false;
+                        _orcRadio.IsClicked = false;
+
+                        if (_gargoyleRadio != null)
+                        {
+                            _gargoyleRadio.IsClicked = false;
+                        }
+
+                        HandleRaceChanged();
+                    }
+
+                    break;
+
+                case Buttons.OrcButton:
+
+                    _characterInfo.Race = RaceType.ORC;
+
+                    if (!_orcRadio.IsClicked)
+                    {
+                        _orcRadio.IsClicked = true;
+                        _humanRadio.IsClicked = false;
+                        _elfRadio.IsClicked = false;
 
                         if (_gargoyleRadio != null)
                         {
@@ -1020,6 +1129,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             FemaleButton,
             HumanButton,
             ElfButton,
+            OrcButton,
             GargoyleButton,
             Prev,
             Next

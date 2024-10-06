@@ -31,6 +31,7 @@
 #endregion
 
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using ClassicUO.Assets;
 
 namespace ClassicUO.Game.Data
@@ -150,6 +151,8 @@ namespace ClassicUO.Game.Data
 
                 case RaceType.ELF: return ElfSkinTone;
 
+                case RaceType.ORC: return HumanSkinTone;
+
                 case RaceType.GARGOYLE: return GargoyleSkinTone;
             }
 
@@ -165,6 +168,8 @@ namespace ClassicUO.Game.Data
                 case RaceType.HUMAN: return HumanHairColor;
 
                 case RaceType.ELF: return ElfHairColor;
+
+                case RaceType.ORC: return HumanHairColor;
 
                 case RaceType.GARGOYLE: return GargoyleHairColor;
             }
@@ -200,6 +205,18 @@ namespace ClassicUO.Game.Data
                         return new ComboContent(ElfHairLabels, ElfHairGraphics);
                     }
 
+                case RaceType.ORC:
+
+                    if (isFemale)
+                    {
+                        return new ComboContent(GargoyleFemaleHairLabels, GargoyleFemaleHairGraphics);
+                    }
+                    else
+                    {
+                    }
+                        return new ComboContent(GargoyleHairLabels, GargoyleHairGraphics);
+
+
                 case RaceType.GARGOYLE:
 
                     if (isFemale)
@@ -228,6 +245,10 @@ namespace ClassicUO.Game.Data
             switch (race)
             {
                 case RaceType.HUMAN: return new ComboContent(HumanFacialLabels, HumanFacialGraphics);
+
+                case RaceType.ELF: return new ComboContent(HumanFacialLabels, HumanFacialGraphics);
+
+                case RaceType.ORC: return new ComboContent(GargoyleFacialLabels, GargoyleFacialGraphics);
 
                 case RaceType.GARGOYLE: return new ComboContent(GargoyleFacialLabels, GargoyleFacialGraphics);
             }
@@ -258,7 +279,7 @@ namespace ClassicUO.Game.Data
 
             public int GetGraphic(int index)
             {
-                return _ids[index];
+                return _ids[index];                
             }
         }
     }

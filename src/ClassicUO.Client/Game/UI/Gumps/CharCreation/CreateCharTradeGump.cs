@@ -134,7 +134,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                     196,
                     93,
                     10,
-                    60,
+                    120,
                     ProfessionInfo._VoidStats[0],
                     HSliderBarStyle.MetalWidgetRecessedBar,
                     true
@@ -149,7 +149,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                     276,
                     93,
                     10,
-                    60,
+                    120,
                     ProfessionInfo._VoidStats[1],
                     HSliderBarStyle.MetalWidgetRecessedBar,
                     true
@@ -164,7 +164,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                     356,
                     93,
                     10,
-                    60,
+                    120,
                     ProfessionInfo._VoidStats[2],
                     HSliderBarStyle.MetalWidgetRecessedBar,
                     true

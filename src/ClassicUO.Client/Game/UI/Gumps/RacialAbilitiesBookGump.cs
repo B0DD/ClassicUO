@@ -287,7 +287,7 @@ namespace ClassicUO.Game.UI.Gumps
 
                     break;
 
-                case RaceType.GARGOYLE:
+                case RaceType.ORC:
                     _abilityCount = 5;
                     iconStartGraphic = 0x5DDA;
                     _tooltipOffset = 1112208;
@@ -305,6 +305,7 @@ namespace ClassicUO.Game.UI.Gumps
             {
                 case RaceType.HUMAN: return _humanNames[offset];
                 case RaceType.ELF: return _elfNames[offset];
+                case RaceType.ORC: return _gargoyleNames[offset];
 
                 case RaceType.GARGOYLE:
 

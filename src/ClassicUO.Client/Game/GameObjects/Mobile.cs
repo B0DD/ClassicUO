@@ -1056,11 +1056,11 @@ namespace ClassicUO.Game.GameObjects
 
                         break;
                     }
-
+                //non capisco cosa sono sti hex
                 case 0x029A:
                     {
                         IsFemale = false;
-                        Race = RaceType.GARGOYLE;
+                        Race = RaceType.ORC;
 
                         break;
                     }
@@ -1068,7 +1068,7 @@ namespace ClassicUO.Game.GameObjects
                 case 0x029B:
                     {
                         IsFemale = true;
-                        Race = RaceType.GARGOYLE;
+                        Race = RaceType.ORC;
 
                         break;
                     }

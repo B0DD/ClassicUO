@@ -40,6 +40,8 @@ namespace ClassicUO.Game.UI.Gumps
                         return 0x702;
                     case RaceType.ELF:
                         return 0x705;
+                    case RaceType.ORC:
+                        return 0x7D3;
                     case RaceType.GARGOYLE:
                         return 0x7D4;
                 }
@@ -55,6 +57,8 @@ namespace ClassicUO.Game.UI.Gumps
                     case RaceType.HUMAN:
                         return 79;
                     case RaceType.ELF:
+                        return 79;
+                    case RaceType.ORC:
                         return 79;
                     case RaceType.GARGOYLE:
                         return 99;

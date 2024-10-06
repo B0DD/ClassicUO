@@ -75,8 +75,7 @@ namespace ClassicUO.Game.UI.Gumps.Login
                 align: TEXT_ALIGN_TYPE.TS_CENTER
             )
             {
-                X = 162,
-                Y = 178
+                X = 162, Y = 178
             };
 
             Add
