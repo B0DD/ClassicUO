@@ -1056,7 +1056,7 @@ namespace ClassicUO.Game.GameObjects
 
                         break;
                     }
-                //non capisco cosa sono sti hex
+                
                 case 0x029A:
                     {
                         IsFemale = false;

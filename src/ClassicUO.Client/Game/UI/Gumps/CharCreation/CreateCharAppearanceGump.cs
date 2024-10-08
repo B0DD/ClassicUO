@@ -79,7 +79,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new ResizePic(0x0E10)
                 {
-                    X = 82, Y = 125, Width = 151, Height = 310
+                    X = 82, Y = 125, Width = 151, Height = 250
                 },
                 1
             );
@@ -107,35 +107,19 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new ResizePic(0x0E10)
                 {
-                    X = 475, Y = 125, Width = 151, Height = 310
+                    X = 475, Y = 125, Width = 151, Height = 250
                 },
                 1
             );
 
-            // Male - Female Radio
-            Add
-            (
-                _maleRadio = new Button((int)Buttons.MaleButton, 0x0768, 0x0767)
-                {
-                    X = 425, Y = 435, ButtonAction = ButtonAction.Activate
-                },
-                1
-            );
-
-            Add
-            (
-                _femaleRadio = new Button((int)Buttons.FemaleButton, 0x0768, 0x0767)
-                {
-                    X = 425, Y = 455, ButtonAction = ButtonAction.Activate
-                },
-                1
-            );
+            // Male - Female BTN
             
+
             Add
             (
                 new Button((int) Buttons.MaleButton, 0x0710, 0x0712, 0x0711)
                 {
-                    X = 445, Y = 435, ButtonAction = ButtonAction.Activate
+                    X = 270, Y = 400, ButtonAction = ButtonAction.Activate
                 },
                 1
             );
@@ -144,7 +128,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new Button((int) Buttons.FemaleButton, 0x070D, 0x070F, 0x070E)
                 {
-                    X = 445, Y = 455, ButtonAction = ButtonAction.Activate
+                    X = 360, Y = 400, ButtonAction = ButtonAction.Activate
                 },
                 1
             );
@@ -174,7 +158,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 _humanRadio = new Button((int)Buttons.HumanButton, 0x0768, 0x0767)
                 {
-                    X = 180, Y = 435, ButtonAction = ButtonAction.Activate
+                    X = 160, Y = 440, ButtonAction = ButtonAction.Activate
                 },
                 1
             );
@@ -183,7 +167,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new Button((int) Buttons.HumanButton, 0x0702, 0x0704, 0x0703)
                 {
-                    X = 200, Y = 435, ButtonAction = ButtonAction.Activate
+                    X = 180, Y = 440, ButtonAction = ButtonAction.Activate
                 },
                 1
             );
@@ -194,7 +178,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 _elfRadio = new Button((int)Buttons.ElfButton, 0x0768, 0x0767, 0x0768)
                 {
-                    X = 180, Y = 455, ButtonAction = ButtonAction.Activate
+                    X = 290, Y = 440, ButtonAction = ButtonAction.Activate
                 },
                 1
             );
@@ -203,7 +187,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new Button((int) Buttons.ElfButton, 0x0705, 0x0707, 0x0706)
                 {
-                    X = 200, Y = 455, ButtonAction = ButtonAction.Activate
+                    X = 310, Y = 440, ButtonAction = ButtonAction.Activate
                 },
                 1
             );
@@ -214,7 +198,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
            (
                _orcRadio = new Button((int)Buttons.OrcButton, 0x0768, 0x0767, 0x0768)
                {
-                   X = 60, Y = 435, ButtonAction = ButtonAction.Activate
+                   X = 420, Y = 440, ButtonAction = ButtonAction.Activate
                },
                1
            );
@@ -223,7 +207,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new Button((int)Buttons.OrcButton, 0x07D3, 0x07D5, 0x07D4)
                 {
-                    X = 80, Y = 435, ButtonAction = ButtonAction.Activate
+                    X = 440, Y = 440, ButtonAction = ButtonAction.Activate
                 },
                 1
             );
@@ -254,7 +238,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new Button((int) Buttons.Prev, 0x15A1, 0x15A3, 0x15A2) //5537 +2 nrm,prs,act
                 {
-                    X = 586, Y = 445, ButtonAction = ButtonAction.Activate
+                    X = 15, Y = 445, ButtonAction = ButtonAction.Activate
                 },
                 1
             );
@@ -268,8 +252,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 1
             );
 
-            _maleRadio.IsClicked = true;
-            _humanRadio.IsClicked = true;
+            
             _characterInfo.IsFemale = false;
             _characterInfo.Race = RaceType.HUMAN;
 
@@ -437,6 +420,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             }
 
             layer = Layer.Hair;
+           
             content = CharacterCreationValues.GetHairComboContent(_characterInfo.IsFemale, race);
 
             Item it = CreateItem(content.GetGraphic(CurrentOption[layer]), CurrentColorOption[layer].Item2, layer);
@@ -611,7 +595,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                     20
                 );
             }
-
+            
             // Hair
             pallet = CharacterCreationValues.GetHairPallet(race);
 
@@ -625,8 +609,8 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 8,
                 pallet.Length >> 3
             );
-
-
+            
+            /*
             // Hair
             pallet = CharacterCreationValues.GetHairPallet(race);
 
@@ -640,7 +624,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 8,
                 pallet.Length >> 3
             );
-
+            */
             if (!_characterInfo.IsFemale && race != RaceType.ORC)
             {
                 // Facial
@@ -788,18 +772,14 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
             switch ((Buttons) buttonID)
             {
-                case Buttons.FemaleButton:
-                    _femaleRadio.IsClicked = true;
-                    _maleRadio.IsClicked = false;
+                case Buttons.FemaleButton:                    
                     _characterInfo.IsFemale = true;
 
                     HandleGenreChange();
 
                     break;
 
-                case Buttons.MaleButton:
-                    _maleRadio.IsClicked = true;
-                    _femaleRadio.IsClicked = false;
+                case Buttons.MaleButton:                    
                     _characterInfo.IsFemale = false;
 
                     HandleGenreChange();

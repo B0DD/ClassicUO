@@ -67,7 +67,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
             Add(new GumpPic(291, 42, 0x0589, 0));
             Add(new GumpPic(214, 58, 0x058B, 0));
-            Add(new GumpPic(300, 51, 0x15A9, 0));
+            Add(new GumpPic(300, 51, 0x15A9, 0));//uologo
 
             ClilocLoader localization = ClilocLoader.Instance;
 
@@ -81,7 +81,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
             Add
             (
-                new Label(localization.GetString(3000326, "Choose a Trade for Your Character"), unicode, hue, font: font)
+                new Label(localization.GetString(3000326, "Choose a Class for Your Character"), unicode, hue, font: font)
                 {
                     X = 158,
                     Y = 132
@@ -109,7 +109,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new Button((int) Buttons.Prev, 0x15A1, 0x15A3, 0x15A2)
                 {
-                    X = 586,
+                    X = 15,
                     Y = 445,
                     ButtonAction = ButtonAction.Activate
                 }

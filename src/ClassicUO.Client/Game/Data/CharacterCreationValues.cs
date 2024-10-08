@@ -48,10 +48,19 @@ namespace ClassicUO.Game.Data
         };
         private static readonly ushort[] ElfSkinTone =
         {
-            0x04DD, 0x076B, 0x0834, 0x042F, 0x024C, 0x024D, 0x024E, 0x00BE, 0x04A6, 0x0360, 0x0374, 0x0366, 0x03E7,
+            0x04DD, 0x076B, 0x0834, 0x042F, 0x024C, 0x024D, 0x024E, 0x00BE, 0x0360, 0x0374, 0x0366, 0x03E7,
             0x03DD, 0x0352, 0x0902, 0x076C, 0x0383, 0x0578, 0x03E8, 0x0373, 0x0388, 0x0384, 0x0375, 0x053E, 0x0380,
             0x0381, 0x0382, 0x076A, 0x03E4, 0x051C, 0x03E5
         };
+
+        private static readonly ushort[] OrcSkinTone =
+        {
+            0x009D, 0x009E, 0x009F, 0x00A0, 0x00A2, 0x00A3, 0x00A4, 0x00A5,0x009A, 0x009B, 0x009C, 0x009D, 0x009E, 0x009F
+                , 0x00A0, 0x00A1, 0x0095, 0x0096, 0x0097, 0x0098
+        };
+
+
+
         private static readonly ushort[] GargoyleSkinTone =
         {
             0x06DA, 0x06DB, 0x06DC, 0x06DD, 0x06DE, 0x06DF, 0x06E0, 0x06E1, 0x06E2, 0x06E3, 0x06E4, 0x06E5, 0x06E6,
@@ -151,7 +160,7 @@ namespace ClassicUO.Game.Data
 
                 case RaceType.ELF: return ElfSkinTone;
 
-                case RaceType.ORC: return HumanSkinTone;
+                case RaceType.ORC: return OrcSkinTone;
 
                 case RaceType.GARGOYLE: return GargoyleSkinTone;
             }
@@ -169,7 +178,7 @@ namespace ClassicUO.Game.Data
 
                 case RaceType.ELF: return ElfHairColor;
 
-                case RaceType.ORC: return HumanHairColor;
+                case RaceType.ORC: return ElfHairColor;
 
                 case RaceType.GARGOYLE: return GargoyleHairColor;
             }
@@ -209,12 +218,12 @@ namespace ClassicUO.Game.Data
 
                     if (isFemale)
                     {
-                        return new ComboContent(GargoyleFemaleHairLabels, GargoyleFemaleHairGraphics);
+                        return new ComboContent(ElfFemaleHairLabels, ElfFemaleHairGraphics);
                     }
                     else
                     {
                     }
-                        return new ComboContent(GargoyleHairLabels, GargoyleHairGraphics);
+                    return new ComboContent(HumanHairLabels, HumanHairGraphics);
 
 
                 case RaceType.GARGOYLE:
@@ -248,7 +257,7 @@ namespace ClassicUO.Game.Data
 
                 case RaceType.ELF: return new ComboContent(HumanFacialLabels, HumanFacialGraphics);
 
-                case RaceType.ORC: return new ComboContent(GargoyleFacialLabels, GargoyleFacialGraphics);
+                case RaceType.ORC: return new ComboContent(HumanFacialLabels, HumanFacialGraphics);
 
                 case RaceType.GARGOYLE: return new ComboContent(GargoyleFacialLabels, GargoyleFacialGraphics);
             }
