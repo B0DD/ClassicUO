@@ -55,8 +55,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
         private PlayerMobile _character;
         private CharacterInfo _characterInfo;
-        private readonly Button _humanRadio, _elfRadio, _orcRadio, _gargoyleRadio;
-        private readonly Button _maleRadio, _femaleRadio;
+        private readonly Button _humanRadio, _elfRadio, _orcRadio, _gargoyleRadio;        
         private Combobox _hairCombobox, _facialCombobox;
         private Label _hairLabel, _facialLabel;
         private readonly StbTextBox _nameTextBox;

@@ -68,10 +68,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
             Add
             (
-                new ResizePic(2600)
-                {
-                    X = 100, Y = 80, Width = 470, Height = 372
-                }
+                new ResizePic(2600) { X = 100, Y = 80, Width = 470, Height = 372 }
             );
 
             // center menu with fancy top
@@ -90,174 +87,34 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
             // title text
             //TextLabelAscii(AControl parent, int x, int y, int font, int hue, string text, int width = 400)
-            Add
-            (
-                new Label(ClilocLoader.Instance.GetString(3000326), unicode, hue, font: font)
-                {
-                    X = 148, Y = 132
-                }
-            );
+           
+            Add(new Label("Select Your Skills", false, 0x0386, font: 1) { X = 148, Y = 112 });
 
-            // strength, dexterity, intelligence
-            Add
-            (
-                new Label(ClilocLoader.Instance.GetString(3000111), unicode, 1, font: 1)
-                {
-                    X = 158, Y = 170
-                }
-            );
-
-            Add
-            (
-                new Label(ClilocLoader.Instance.GetString(3000112), unicode, 1, font: 1)
-                {
-                    X = 158, Y = 250
-                }
-            );
-
-            Add
-            (
-                new Label(ClilocLoader.Instance.GetString(3000113), unicode, 1, font: 1)
-                {
-                    X = 158, Y = 330
-                }
-            );
-
-            // sliders for attributes
-            _attributeSliders = new HSliderBar[3];
-
-            Add
-            (
-                _attributeSliders[0] = new HSliderBar
-                (
-                    164,
-                    196,
-                    93,
-                    10,
-                    120,
-                    ProfessionInfo._VoidStats[0],
-                    HSliderBarStyle.MetalWidgetRecessedBar,
-                    true
-                )
-            );
-
-            Add
-            (
-                _attributeSliders[1] = new HSliderBar
-                (
-                    164,
-                    276,
-                    93,
-                    10,
-                    120,
-                    ProfessionInfo._VoidStats[1],
-                    HSliderBarStyle.MetalWidgetRecessedBar,
-                    true
-                )
-            );
-
-            Add
-            (
-                _attributeSliders[2] = new HSliderBar
-                (
-                    164,
-                    356,
-                    93,
-                    10,
-                    120,
-                    ProfessionInfo._VoidStats[2],
-                    HSliderBarStyle.MetalWidgetRecessedBar,
-                    true
-                )
-            );
-
-            var clientFlags = World.ClientLockedFeatures.Flags;
-
-            _skillList = SkillsLoader.Instance.SortedSkills
-                         .Where(s =>
-                                     // All standard client versions ignore these skills by defualt
-                                     //s.Index != 26 && // MagicResist
-                                     s.Index != 47 && // Stealth
-                                     s.Index != 48 && // RemoveTrap
-                                     s.Index != 54 && // Spellweaving
-                                     (character.Race == RaceType.GARGOYLE || s.Index != 57) // Throwing for gargoyle only
-                                 )
-                          .Where(s =>
-                                    clientFlags.HasFlag(LockedFeatureFlags.ExpansionAOS) ||
-                                    (   
-                                        s.Index != 51 && // Chivlary
-                                        s.Index != 50 && // Focus
-                                        s.Index != 49    // Necromancy
-                                    )
-                                )
-
-                          .Where(s =>
-                                    clientFlags.HasFlag(LockedFeatureFlags.ExpansionSE) ||
-                                    (
-                                        s.Index != 52 && // Bushido
-                                        s.Index != 53    // Ninjitsu
-                                    )
-                                )
-
-                          .Where(s =>
-                                    clientFlags.HasFlag(LockedFeatureFlags.ExpansionSA) ||
-                                    (
-                                        s.Index != 55 && // Mysticism
-                                        s.Index != 56    // Imbuing
-                                    )
-                                )
-                         .ToList();
-
-            // do not include archer if it's a gargoyle
-            if (character.Race == RaceType.GARGOYLE)
-            {
-                var archeryEntry = _skillList.FirstOrDefault(s => s.Index == 31);
-                if (archeryEntry != null)
-                {
-                    _skillList.Remove(archeryEntry);
-                }
-            }
-
+            _skillList = SkillsLoader.Instance.SortedSkills;
             var skillNames = _skillList.Select(s => s.Name).ToArray();
 
-            int y = 172;
-            _skillSliders = new HSliderBar[CharCreationGump._skillsCount];
-            _skillsCombobox = new Combobox[CharCreationGump._skillsCount];
+                      
+            _skillsCombobox = new Combobox[10]; // 4 a 90, 2 a 70, 4 a 50
 
-            for (int i = 0; i < CharCreationGump._skillsCount; i++)
-            {
-                Add
-                (
-                    _skillsCombobox[i] = new Combobox
-                    (
-                        344,
-                        y,
-                        182,
-                        skillNames,
-                        -1,
-                        200,
-                        false,
-                        "Click here"
-                    )
-                );
+            // 4 abilità a 90
+            Add(new Label($"Set 4 Skills at 90.0:", false, 0x0386, font: 1) { X = 148, Y = 132 });
+            Add(_skillsCombobox[0] = new Combobox(148, 150, 182, skillNames, -1, 200, false, "Select Skill"));
+            Add(_skillsCombobox[1] = new Combobox(350, 150, 182, skillNames, -1, 200, false, "Select Skill"));
+            Add(_skillsCombobox[2] = new Combobox(148, 180, 182, skillNames, -1, 200, false, "Select Skill"));
+            Add(_skillsCombobox[3] = new Combobox(350, 180, 182, skillNames, -1, 200, false, "Select Skill"));
 
-                Add
-                (
-                    _skillSliders[i] = new HSliderBar
-                    (
-                        344,
-                        y + 32,
-                        93,
-                        0,
-                        50,
-                        ProfessionInfo._VoidSkills[i, 1],
-                        HSliderBarStyle.MetalWidgetRecessedBar,
-                        true
-                    )
-                );
+            // 2 abilità a 70
+            Add(new Label($"Set 4 Skills at 70.0:", false, 0x0386, font: 1) { X = 148, Y = 220 });
+            Add(_skillsCombobox[4] = new Combobox(148, 240, 182, skillNames, -1, 200, false, "Select Skill"));
+            Add(_skillsCombobox[5] = new Combobox(350, 240, 182, skillNames, -1, 200, false, "Select Skill"));
 
-                y += 70;
-            }
+            // 4 abilità a 50
+            Add(new Label($"Set 4 Skills at 50.0:", false, 0x0386, font: 1) { X = 148, Y = 280 });
+            Add(_skillsCombobox[6] = new Combobox(148, 300, 182, skillNames, -1, 200, false, "Select Skill"));
+            Add(_skillsCombobox[7] = new Combobox(350, 300, 182, skillNames, -1, 200, false, "Select Skill"));
+            Add(_skillsCombobox[8] = new Combobox(148, 330, 182, skillNames, -1, 200, false, "Select Skill"));
+            Add(_skillsCombobox[9] = new Combobox(350, 330, 182, skillNames, -1, 200, false, "Select Skill"));
+
 
             Add
             (
@@ -274,28 +131,8 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                     X = 610, Y = 445, ButtonAction = ButtonAction.Activate
                 }
             );
-
-            for (int i = 0; i < _attributeSliders.Length; i++)
-            {
-                for (int j = 0; j < _attributeSliders.Length; j++)
-                {
-                    if (i != j)
-                    {
-                        _attributeSliders[i].AddParisSlider(_attributeSliders[j]);
-                    }
-                }
-            }
-
-            for (int i = 0; i < _skillSliders.Length; i++)
-            {
-                for (int j = 0; j < _skillSliders.Length; j++)
-                {
-                    if (i != j)
-                    {
-                        _skillSliders[i].AddParisSlider(_skillSliders[j]);
-                    }
-                }
-            }
+           
+           
         }
 
         public override void OnButtonClick(int buttonID)
@@ -310,28 +147,42 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                     break;
 
                 case Buttons.Next:
-
                     if (ValidateValues())
                     {
-                        for (int i = 0; i < _skillsCombobox.Length; i++)
+                        // Imposta le abilità selezionate con i valori fissi
+                        for (int i = 0; i < 4; i++)  // 4 abilità a 90
                         {
                             if (_skillsCombobox[i].SelectedIndex != -1)
                             {
                                 Skill skill = _character.Skills[_skillList[_skillsCombobox[i].SelectedIndex].Index];
-                                skill.ValueFixed = (ushort) _skillSliders[i].Value;
-                                skill.BaseFixed = 0;
-                                skill.CapFixed = 0;
+                                skill.ValueFixed =(ushort)900;  // 90.0 in valore fisso
                                 skill.Lock = Lock.Locked;
                             }
                         }
 
-                        _character.Strength = (ushort) _attributeSliders[0].Value;
-                        _character.Intelligence = (ushort) _attributeSliders[1].Value;
-                        _character.Dexterity = (ushort) _attributeSliders[2].Value;
+                        for (int i = 4; i < 6; i++)  // 2 abilità a 70
+                        {
+                            if (_skillsCombobox[i].SelectedIndex != -1)
+                            {
+                                Skill skill = _character.Skills[_skillList[_skillsCombobox[i].SelectedIndex].Index];
+                                skill.ValueFixed = (ushort)700;  // 70.0 in valore fisso
+                                skill.Lock = Lock.Locked;
+                            }
+                        }
 
-                        charCreationGump.SetAttributes(true);
+                        for (int i = 6; i < 10; i++)  // 4 abilità a 50
+                        {
+                            if (_skillsCombobox[i].SelectedIndex != -1)
+                            {
+                                Skill skill = _character.Skills[_skillList[_skillsCombobox[i].SelectedIndex].Index];
+                                skill.ValueFixed = (ushort)500;  // 50.0 in valore fisso
+                                skill.Lock = Lock.Locked;
+                            }
+                        }
+
+                        // Passa alla pagina successiva
+                        charCreationGump.SetLastPage();
                     }
-
                     break;
             }
 
@@ -340,25 +191,25 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
         private bool ValidateValues()
         {
+            // Verifica che tutte le abilità siano selezionate
             if (_skillsCombobox.All(s => s.SelectedIndex >= 0))
             {
+                // Assicurati che non ci siano abilità duplicate
                 int duplicated = _skillsCombobox.GroupBy(o => o.SelectedIndex).Count(o => o.Count() > 1);
 
                 if (duplicated > 0)
                 {
-                    UIManager.GetGump<CharCreationGump>()?.ShowMessage(ClilocLoader.Instance.GetString(1080032));
-
+                    UIManager.GetGump<CharCreationGump>()?.ShowMessage("You must select unique skills.");
                     return false;
                 }
+
+                return true;
             }
             else
             {
-                UIManager.GetGump<CharCreationGump>()?.ShowMessage(Client.Version <= ClientVersion.CV_5090 ? ResGumps.YouMustHaveThreeUniqueSkillsChosen : ClilocLoader.Instance.GetString(1080032));
-
+                UIManager.GetGump<CharCreationGump>()?.ShowMessage("You must select all skills.");
                 return false;
             }
-
-            return true;
         }
 
         private enum Buttons
