@@ -367,7 +367,7 @@ namespace ClassicUO.Network
                 _packetsTable[0xF1] = -1;
             }
 
-            if (version >= ClientVersion.CV_60142)
+            if (version >= ClientVersion.CV_60142)//false
             {
                 _packetsTable[0xB9] = 0x05;
             }
