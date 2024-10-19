@@ -86,7 +86,7 @@ namespace ClassicUO
 
             Window.ClientSizeChanged += WindowOnClientSizeChanged;
             Window.AllowUserResizing = true;
-            Window.Title = $"UO Last Hera - {CUOEnviroment.Version}";
+            Window.Title = $"Ultima Online - {CUOEnviroment.Version}";
             IsMouseVisible = Settings.GlobalSettings.RunMouseInASeparateThread;
 
             IsFixedTimeStep = false; // Settings.GlobalSettings.FixedTimeStep;
@@ -257,7 +257,7 @@ namespace ClassicUO
 #if DEV_BUILD
                 Window.Title = $"ClassicUO [dev] - {CUOEnviroment.Version}";
 #else
-                Window.Title = $"[UO Last Hera {CUOEnviroment.Version}]";
+                Window.Title = $"[UO Last Hera - {CUOEnviroment.Version}]";
 #endif
             }
             else
@@ -265,7 +265,7 @@ namespace ClassicUO
 #if DEV_BUILD
                 Window.Title = $"{title} - ClassicUO [dev] - {CUOEnviroment.Version}";
 #else
-                Window.Title = $"{title} - [UO Last Hera {CUOEnviroment.Version}]";
+                Window.Title = $"{title} - [Ultima Online Last Hera - {CUOEnviroment.Version}]";
 #endif
             }
         }

@@ -87,10 +87,8 @@ namespace ClassicUO.Game.UI.Gumps
             {
                 new[] { 1, (int) Buttons.Paperdoll },
                 new[] { 1, (int) Buttons.Inventory },
-                new[] { 1, (int) Buttons.Journal },
-                new[] { 0, (int) Buttons.Chat },
-                new[] { 1, (int) Buttons.WorldMap },
-                new[] { 1, (int) Buttons.UOStore },
+                new[] { 1, (int) Buttons.Journal },                
+                new[] { 1, (int) Buttons.WorldMap },                
             };
 
             var cliloc = ClilocLoader.Instance;
@@ -99,10 +97,8 @@ namespace ClassicUO.Game.UI.Gumps
             {
                 cliloc.GetString(3000133, ResGumps.Paperdoll),
                 cliloc.GetString(3000431, ResGumps.Inventory),
-                cliloc.GetString(3000129, ResGumps.Journal),
-                cliloc.GetString(3000131, ResGumps.Chat),
-                StringHelper.CapitalizeAllWords(cliloc.GetString(1015233, ResGumps.WorldMap)),
-                cliloc.GetString(1158008, ResGumps.UOStore),
+                cliloc.GetString(3000129, ResGumps.Journal),                
+                StringHelper.CapitalizeAllWords(cliloc.GetString(1015233, ResGumps.WorldMap)),                
             };
 
             bool hasUOStore = Client.Version >= ClientVersion.CV_706400;
@@ -251,7 +247,7 @@ namespace ClassicUO.Game.UI.Gumps
                 }
             }));
             moreMenu.ContextMenu.Add(new ContextMenuItemEntry(cliloc.GetString(3000134, ResGumps.Help), () => { GameActions.RequestHelp(); }));
-            moreMenu.ContextMenu.Add(new ContextMenuItemEntry("Open boat control", () => { UIManager.Add(new BoatControl() { X = 200, Y = 200 }); }));
+            //moreMenu.ContextMenu.Add(new ContextMenuItemEntry("Open boat control", () => { UIManager.Add(new BoatControl() { X = 200, Y = 200 }); }));
 
             startX += largeWidth + 1;
 
