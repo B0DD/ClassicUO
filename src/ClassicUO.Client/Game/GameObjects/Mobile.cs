@@ -1065,7 +1065,7 @@ namespace ClassicUO.Game.GameObjects
                         break;
                     }
 
-                case 0x029B:
+                case 0x0299:
                     {
                         IsFemale = true;
                         Race = RaceType.ORC;

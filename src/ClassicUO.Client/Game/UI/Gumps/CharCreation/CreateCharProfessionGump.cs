@@ -248,9 +248,6 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 _selectedClass = (ChosenClass)buttonID;
                 Debug.WriteLine($"Classe scelta: {_selectedClass}");
 
-                // salva classe scelta su *.txt
-                SaveChosenClass();
-
                 CharCreationGump charCreationGump = UIManager.GetGump<CharCreationGump>();
 
                 if (charCreationGump != null)
@@ -262,14 +259,6 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             else
             {
                 base.OnButtonClick(buttonID);
-            }
-        }
-
-        private void SaveChosenClass()
-        {
-            using (StreamWriter writer = new StreamWriter("chosen_class.txt"))
-            {
-                writer.WriteLine((int)_selectedClass);
             }
         }
 
