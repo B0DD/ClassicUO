@@ -88,7 +88,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             // title text
             //TextLabelAscii(AControl parent, int x, int y, int font, int hue, string text, int width = 400)
            
-            Add(new Label("Select Your Skills", false, 0x0386, font: 1) { X = 148, Y = 112 });
+            Add(new Label("Choose Your Skills", false, 0x0386, font: 1) { X = 148, Y = 112 });
 
             _skillList = SkillsLoader.Instance.SortedSkills;
             var skillNames = _skillList.Select(s => s.Name).ToArray();

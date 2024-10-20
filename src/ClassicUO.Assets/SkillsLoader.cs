@@ -186,5 +186,21 @@ namespace ClassicUO.Assets
             Imbuing,
             Throwing
         }
+
+        public enum Work_Skill
+        {
+            Alchemy      =0,
+            Blacksmith   =7,
+            Bowcraft     =8,
+            Carpentry    =11,
+            Cartography  =12,
+            Cooking      =13,
+            Fishing      =18,
+            Tailoring    =34,
+            Tinkering    =37,
+            Lumberjacking=44,
+            Mining       =45,
+        }
+
     }
 }

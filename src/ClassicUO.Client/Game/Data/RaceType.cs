@@ -37,7 +37,7 @@ namespace ClassicUO.Game.Data
         HUMAN = 1,
         ELF = 2,
         GARGOYLE = 3,
-        ORC = 10
+        ORC = 4
         
         
     }
