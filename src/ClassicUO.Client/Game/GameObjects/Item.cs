@@ -168,6 +168,10 @@ namespace ClassicUO.Game.GameObjects
             MathHelper.InRange(Amount, 0x025D, 0x0260) || 
             MathHelper.InRange(Amount, 0x029A, 0x029B) || 
             MathHelper.InRange(Amount, 0x02B6, 0x02B7) || 
+            //orco
+            MathHelper.InRange(Amount, 0x0261, 0x0262) || 
+            MathHelper.InRange(Amount, 0x0263, 0x0264) || 
+
             Amount == 0x03DB || 
             Amount == 0x03DF || 
             Amount == 0x03E2 || 

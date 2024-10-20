@@ -358,7 +358,7 @@ namespace ClassicUO.Game.UI.Gumps
             }
             else if (selectedRace == RaceType.ORC)
             {
-                fakeMobile.Graphic = (ushort)(isFemale ? 0x0299 : 0x029A);
+                fakeMobile.Graphic = (ushort)(isFemale ? 0x0262 : 0x261);
             }
             else
             {
@@ -722,6 +722,16 @@ namespace ClassicUO.Game.UI.Gumps
                 {
                     body = 0x0299;
                 }
+                //orco
+                else if (mobile.Graphic == 0x0261 || mobile.Graphic == 0x0263)
+                {
+                    body = 0x0261;
+                }
+                else if (mobile.Graphic == 0x0262 || mobile.Graphic == 0x0264)
+                {
+                    body = 0x0262;
+                }
+
                 else if (mobile.Graphic == 0x04E5)
                 {
                     body = 0xC835;

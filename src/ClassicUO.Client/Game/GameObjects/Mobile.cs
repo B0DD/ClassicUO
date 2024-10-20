@@ -181,6 +181,12 @@ namespace ClassicUO.Game.GameObjects
             || Graphic == 0x029B
             || Graphic == 0x02B6
             || Graphic == 0x02B7
+            //orco
+            || Graphic == 0x0261
+            || Graphic == 0x0262
+            || Graphic == 0x0263
+            || Graphic == 0x0264
+
             || Graphic == 0x03DB
             || Graphic == 0x03DF
             || Graphic == 0x03E2
@@ -1057,7 +1063,7 @@ namespace ClassicUO.Game.GameObjects
                         break;
                     }
                 
-                case 0x029A:
+                case 0x261:
                     {
                         IsFemale = false;
                         Race = RaceType.ORC;
@@ -1065,7 +1071,7 @@ namespace ClassicUO.Game.GameObjects
                         break;
                     }
 
-                case 0x0299:
+                case 0x0262:
                     {
                         IsFemale = true;
                         Race = RaceType.ORC;

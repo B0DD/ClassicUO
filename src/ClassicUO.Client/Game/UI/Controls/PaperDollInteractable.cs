@@ -177,6 +177,17 @@ namespace ClassicUO.Game.UI.Controls
             {
                 body = 0x0299;
             }
+            //orco
+            else if (mobile.Graphic == 0x0261 || mobile.Graphic == 0x0263)
+            {
+                body = 0x0261;
+            }
+            else if (mobile.Graphic == 0x0262 || mobile.Graphic == 0x0264)
+            {
+                body = 0x0262;
+            }
+
+
             else if (mobile.Graphic == 0x04E5)
             {
                 body = 0xC835;

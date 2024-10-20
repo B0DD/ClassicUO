@@ -332,7 +332,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
                     break;
 
-
+                //orco
                 case RaceType.ORC when isFemale:
                     _character.Graphic = 0x0262;
                     it = CreateItem(0x1710, 0x0384, Layer.Shoes);
