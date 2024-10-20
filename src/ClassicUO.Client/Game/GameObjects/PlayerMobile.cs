@@ -972,7 +972,7 @@ namespace ClassicUO.Game.GameObjects
 
                                 goto done;
 
-                            case 0x2D21: // Assassin Spikes
+                            case 0x2D21: // Thief Spikes
                                 Abilities[0] = Ability.InfectiousStrike;
                                 Abilities[1] = Ability.ShadowStrike;
 
@@ -1044,7 +1044,7 @@ namespace ClassicUO.Game.GameObjects
 
                                 goto done;
 
-                            case 0x2D2D: // also Assassin Spikes
+                            case 0x2D2D: // also Thief Spikes
                                 Abilities[0] = Ability.InfectiousStrike;
                                 Abilities[1] = Ability.ShadowStrike;
 

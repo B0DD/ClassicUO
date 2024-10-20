@@ -50,14 +50,14 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
         private enum ChosenClass
         {
+            Warlock = 0,
             Warrior = 1,
             Warmage = 2,
             Mage = 3,
             Ranger = 4,
             Archer = 5,
             Cleric = 6,
-            Assassin = 7,
-            Warlock = 8
+            Thief = 7
         }
 
         public void SelectProfession(ProfessionInfo info)
@@ -190,7 +190,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 }
             );
 
-            // BTN 7: Assassin
+            // BTN 7: Thief
             Add(
                 new Button(7, 0x15B9, 0x15BA, 0x15B9) 
                 {
@@ -200,7 +200,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 }
             );
             Add(
-                new Label("Assassin", false, 0x0386, font: 1)
+                new Label("Thief", false, 0x0386, font: 1)
                 {
                     X = 327,  
                     Y = 360,  
