@@ -334,7 +334,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
 
                 case RaceType.ORC when isFemale:
-                    _character.Graphic = 0x0299; //gumpID 665
+                    _character.Graphic = 0x0262;
                     it = CreateItem(0x1710, 0x0384, Layer.Shoes);
                     _character.PushToBack(it);
 
@@ -349,7 +349,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                     break;
 
                 case RaceType.ORC:
-                    _character.Graphic = 0x029A; //gumpID 666
+                    _character.Graphic = 0x0261;
                     it = CreateItem(0x1710, 0x0384, Layer.Shoes);
                     _character.PushToBack(it);
 
