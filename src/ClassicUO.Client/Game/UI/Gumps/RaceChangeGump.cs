@@ -358,7 +358,7 @@ namespace ClassicUO.Game.UI.Gumps
             }
             else if (selectedRace == RaceType.ORC)
             {
-                fakeMobile.Graphic = (ushort)(isFemale ? 0x0262 : 0x261);
+                fakeMobile.Graphic = (ushort)(isFemale ? 0x0262 : 0x0261);
             }
             else
             {
