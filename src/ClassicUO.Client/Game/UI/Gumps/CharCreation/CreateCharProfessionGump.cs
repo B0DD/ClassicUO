@@ -37,27 +37,83 @@ using ClassicUO.Game.Managers;
 using ClassicUO.Game.UI.Controls;
 using ClassicUO.Input;
 using ClassicUO.Assets;
-using System.IO;
-using System.Diagnostics;
-using ClassicUO.Game.UI.Gumps.CharCreation;
-
 
 namespace ClassicUO.Game.UI.Gumps.CharCreation
 {
     internal class CreateCharProfessionGump : Gump
     {
-        private ChosenClass _selectedClass;
+        private readonly ProfessionInfo _Parent;
 
-        private enum ChosenClass
+        public CreateCharProfessionGump(ProfessionInfo parent = null) : base(0, 0)
         {
-            Warlock = 0,
-            Warrior = 1,
-            Warmage = 2,
-            Mage = 3,
-            Ranger = 4,
-            Archer = 5,
-            Cleric = 6,
-            Thief = 7
+            _Parent = parent;
+
+            if (parent == null || !ProfessionLoader.Instance.Professions.TryGetValue(parent, out List<ProfessionInfo> professions) || professions == null)
+            {
+                professions = new List<ProfessionInfo>(ProfessionLoader.Instance.Professions.Keys);
+            }
+
+            /* Build the gump */
+            Add
+            (
+                new ResizePic(2600)
+                {
+                    X = 100,
+                    Y = 80,
+                    Width = 470,
+                    Height = 372
+                }
+            );
+
+            Add(new GumpPic(291, 42, 0x0589, 0));
+            Add(new GumpPic(214, 58, 0x058B, 0));
+            Add(new GumpPic(300, 51, 0x15A9, 0));
+
+            ClilocLoader localization = ClilocLoader.Instance;
+
+            bool isAsianLang = string.Compare(Settings.GlobalSettings.Language, "CHT", StringComparison.InvariantCultureIgnoreCase) == 0 ||
+                string.Compare(Settings.GlobalSettings.Language, "KOR", StringComparison.InvariantCultureIgnoreCase) == 0 ||
+                string.Compare(Settings.GlobalSettings.Language, "JPN", StringComparison.InvariantCultureIgnoreCase) == 0;
+
+            bool unicode = isAsianLang;
+            byte font = (byte)(isAsianLang ? 1 : 2);
+            ushort hue = (ushort)(isAsianLang ? 0xFFFF : 0x0386);
+
+            Add
+            (
+                new Label(localization.GetString(3000326, "Choose a Trade for Your Character"), unicode, hue, font: font)
+                {
+                    X = 158,
+                    Y = 132
+                }
+            );
+
+            for (int i = 0; i < professions.Count; i++)
+            {
+                int cx = i % 2;
+                int cy = i >> 1;
+
+                Add
+                (
+                    new ProfessionInfoGump(professions[i])
+                    {
+                        X = 145 + cx * 195,
+                        Y = 168 + cy * 70,
+
+                        Selected = SelectProfession
+                    }
+                );
+            }
+
+            Add
+            (
+                new Button((int)Buttons.Prev, 0x15A1, 0x15A3, 0x15A2)
+                {
+                    X = 586,
+                    Y = 445,
+                    ButtonAction = ButtonAction.Activate
+                }
+            );
         }
 
         public void SelectProfession(ProfessionInfo info)
@@ -75,196 +131,35 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             }
         }
 
-        public CreateCharProfessionGump(ProfessionInfo parent = null) : base(0, 0)
-        {
-            
-            Add(new ResizePic(2600) 
-                {
-                    X = 100,
-                    Y = 80,
-                    Width = 470,
-                    Height = 372 
-                }
-            );
-            Add(new Label("Choose a Class for Your Character", false, 0x0386, font: 1) { X = 158, Y = 132 });
-
-            // BTN 1: Warrior
-            Add(
-                new Button(1, 0x15C9, 0x15CA, 0x15C9)  
-                {
-                    X = 145,  
-                    Y = 170, 
-                    ButtonAction = ButtonAction.Activate
-                }
-            );
-            Add(
-                new Label("Warrior", false, 0x0386, font: 1)
-                {
-                    X = 147,  
-                    Y = 240,  
-                }
-            );
-
-            // BTN 2: Warmage
-            Add(
-                new Button(2, 0x15D1, 0X15D2, 0x15D1)  
-                {
-                    X = 235,  
-                    Y = 170, 
-                    ButtonAction = ButtonAction.Activate
-                }
-            );
-            Add(
-                new Label("Warmage", false, 0x0386, font: 1)
-                {
-                    X = 235,  
-                    Y = 240,  
-                }
-            );
-
-            // BTN 3: Mage
-            Add(
-                new Button(3, 0x15C1, 0x15C2, 0x15C1)  
-                {
-                    X = 325,  
-                    Y = 170,  
-                    ButtonAction = ButtonAction.Activate
-                }
-            );
-            Add(
-                new Label("Mage", false, 0x0386, font: 1)
-                {
-                    X = 335,  
-                    Y = 240,  
-                }
-            );
-
-            // BTN 4: Ranger
-            Add(
-                new Button(4, 0x15C7, 0x15C8, 0x15C7)  
-                {
-                    X = 415,  
-                    Y = 170, 
-                    ButtonAction = ButtonAction.Activate
-                }
-            );
-            Add(
-                new Label("Ranger", false, 0x0386, font: 1)
-                {
-                    X = 425, 
-                    Y = 240,  
-                }
-            );
-
-            // BTN 5: Archer
-            Add(
-                new Button(5, 0x15AF, 0x15B0, 0x15AF)  
-                {
-                    X = 145,
-                    Y = 290,  
-                    ButtonAction = ButtonAction.Activate
-                }
-            );
-            Add(
-                new Label("Archer", false, 0x0386, font: 1)
-                {
-                    X = 152,  
-                    Y = 360,  
-                }
-            );
-
-            // BTN 6: Cleric
-            Add(
-                new Button(6, 0x15BB, 0x15BC, 0x15BB) 
-                {
-                    X = 235, 
-                    Y = 290, 
-                    ButtonAction = ButtonAction.Activate
-                }
-            );
-            Add(
-                new Label("Cleric", false, 0x0386, font: 1)
-                {
-                    X = 245,  
-                    Y = 360, 
-                }
-            );
-
-            // BTN 7: Thief
-            Add(
-                new Button(7, 0x15B9, 0x15BA, 0x15B9) 
-                {
-                    X = 325, 
-                    Y = 290,  
-                    ButtonAction = ButtonAction.Activate
-                }
-            );
-            Add(
-                new Label("Thief", false, 0x0386, font: 1)
-                {
-                    X = 327,  
-                    Y = 360,  
-                }
-            );
-
-            // BTN 8: Warlock
-            Add(
-                new Button(8, 0x15CD, 0x15CE, 0x15CD)  
-                {
-                    X = 415,
-                    Y = 290, 
-                    ButtonAction = ButtonAction.Activate
-                }
-            );
-            Add(
-                new Label("Warlock", false, 0x0386, font: 1)
-                {
-                    X = 417,  
-                    Y = 360,  
-                }
-            );
-
-
-            Add(new Button((int)Buttons.Prev, 0x15A1, 0x15A3, 0x15A2) { X = 15, Y = 445, ButtonAction = ButtonAction.Activate });            
-        }
-
         public override void OnButtonClick(int buttonID)
         {
             switch ((Buttons)buttonID)
             {
                 case Buttons.Prev:
 
-                    {                        
-                        Parent.Remove(this);
-                        CharCreationGump charCreationGump = UIManager.GetGump<CharCreationGump>();
-                        charCreationGump?.StepBack();                        
+                    {
+                        if (_Parent != null && _Parent.TopLevel)
+                        {
+                            Parent.Add(new CreateCharProfessionGump());
+                            Parent.Remove(this);
+                        }
+                        else
+                        {
+                            Parent.Remove(this);
+                            CharCreationGump charCreationGump = UIManager.GetGump<CharCreationGump>();
+                            charCreationGump?.StepBack();
+                        }
+
                         break;
                     }
-                
             }
-            if (buttonID >= 1 && buttonID <= 8)
-            {
-                // classe scelta
-                _selectedClass = (ChosenClass)buttonID;
-                Debug.WriteLine($"Classe scelta: {_selectedClass}");
 
-                CharCreationGump charCreationGump = UIManager.GetGump<CharCreationGump>();
-
-                if (charCreationGump != null)
-                {
-                    // Passa alla pagina successiva
-                    charCreationGump.SetAttributes(true);  
-                }
-            }
-            else
-            {
-                base.OnButtonClick(buttonID);
-            }
+            base.OnButtonClick(buttonID);
         }
 
         private enum Buttons
         {
-            Prev     
+            Prev
         }
     }
 
@@ -313,4 +208,3 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
         }
     }
 }
-
