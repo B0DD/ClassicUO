@@ -71,7 +71,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
             ClilocLoader localization = ClilocLoader.Instance;
 
-            bool isAsianLang = string.Compare(Settings.GlobalSettings.Language, "CHT", StringComparison.InvariantCultureIgnoreCase) == 0 ||
+            bool isAsianLang = string.Compare(Settings.GlobalSettings.Language, "CHT", StringComparison.InvariantCultureIgnoreCase) == 0 || 
                 string.Compare(Settings.GlobalSettings.Language, "KOR", StringComparison.InvariantCultureIgnoreCase) == 0 ||
                 string.Compare(Settings.GlobalSettings.Language, "JPN", StringComparison.InvariantCultureIgnoreCase) == 0;
 
@@ -107,7 +107,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
             Add
             (
-                new Button((int)Buttons.Prev, 0x15A1, 0x15A3, 0x15A2)
+                new Button((int) Buttons.Prev, 0x15A1, 0x15A3, 0x15A2)
                 {
                     X = 586,
                     Y = 445,
@@ -133,25 +133,25 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
         public override void OnButtonClick(int buttonID)
         {
-            switch ((Buttons)buttonID)
+            switch ((Buttons) buttonID)
             {
                 case Buttons.Prev:
 
+                {
+                    if (_Parent != null && _Parent.TopLevel)
                     {
-                        if (_Parent != null && _Parent.TopLevel)
-                        {
-                            Parent.Add(new CreateCharProfessionGump());
-                            Parent.Remove(this);
-                        }
-                        else
-                        {
-                            Parent.Remove(this);
-                            CharCreationGump charCreationGump = UIManager.GetGump<CharCreationGump>();
-                            charCreationGump?.StepBack();
-                        }
-
-                        break;
+                        Parent.Add(new CreateCharProfessionGump());
+                        Parent.Remove(this);
                     }
+                    else
+                    {
+                        Parent.Remove(this);
+                        CharCreationGump charCreationGump = UIManager.GetGump<CharCreationGump>();
+                        charCreationGump?.StepBack();
+                    }
+
+                    break;
+                }
             }
 
             base.OnButtonClick(buttonID);

@@ -56,25 +56,25 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
         private readonly Point[] _townButtonsText =
         {
-            //new Point(105, 130),
-            //new Point(245, 90),
-            //new Point(165, 200),
-            //new Point(395, 160),
-            //new Point(200, 305),
+            new Point(105, 130),
+            new Point(245, 90),
+            new Point(165, 200),
+            new Point(395, 160),
+            new Point(200, 305),
             new Point(335, 250),
-            //new Point(160, 395),
-            //new Point(100, 250),
-            //new Point(270, 130)
+            new Point(160, 395),
+            new Point(100, 250),
+            new Point(270, 130)
         };
 
-        public CreateCharSelectionCityGump(LoginScene scene) : base(0, 0)
+        public CreateCharSelectionCityGump(byte profession, LoginScene scene) : base(0, 0)
         {
             CanMove = false;
             CanCloseWithRightClick = false;
             CanCloseWithEsc = false;
 
             _scene = scene;
-           // _selectedProfession = profession;
+            _selectedProfession = profession;
 
             CityInfo city;
 
@@ -145,7 +145,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new Button((int) Buttons.PreviousScreen, 0x15A1, 0x15A3, 0x15A2)
                 {
-                    X = 15,
+                    X = 586,
                     Y = 445,
                     ButtonAction = ButtonAction.Activate
                 }

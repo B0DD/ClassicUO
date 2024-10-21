@@ -35,10 +35,8 @@ namespace ClassicUO.Game.Data
     public enum RaceType : byte
     {
         HUMAN = 1,
-        ELF = 2,
-        GARGOYLE = 3,
-        ORC = 4
-        
-        
+        ELF=2,
+        GARGOYLE=3,
+        ORC=4
     }
 }

@@ -70,10 +70,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new ResizePic(2600)
                 {
-                    X = 100,
-                    Y = 80,
-                    Width = 470,
-                    Height = 372
+                    X = 100, Y = 80, Width = 470, Height = 372
                 }
             );
 
@@ -83,7 +80,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             Add(new GumpPic(214, 58, 0x058B, 0));
             Add(new GumpPic(300, 51, 0x15A9, 0));
 
-            bool isAsianLang = string.Compare(Settings.GlobalSettings.Language, "CHT", StringComparison.InvariantCultureIgnoreCase) == 0 ||
+            bool isAsianLang = string.Compare(Settings.GlobalSettings.Language, "CHT", StringComparison.InvariantCultureIgnoreCase) == 0 || 
                 string.Compare(Settings.GlobalSettings.Language, "KOR", StringComparison.InvariantCultureIgnoreCase) == 0 ||
                 string.Compare(Settings.GlobalSettings.Language, "JPN", StringComparison.InvariantCultureIgnoreCase) == 0;
 
@@ -97,8 +94,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new Label(ClilocLoader.Instance.GetString(3000326), unicode, hue, font: font)
                 {
-                    X = 148,
-                    Y = 132
+                    X = 148, Y = 132
                 }
             );
 
@@ -107,8 +103,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new Label(ClilocLoader.Instance.GetString(3000111), unicode, 1, font: 1)
                 {
-                    X = 158,
-                    Y = 170
+                    X = 158, Y = 170
                 }
             );
 
@@ -116,8 +111,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new Label(ClilocLoader.Instance.GetString(3000112), unicode, 1, font: 1)
                 {
-                    X = 158,
-                    Y = 250
+                    X = 158, Y = 250
                 }
             );
 
@@ -125,8 +119,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new Label(ClilocLoader.Instance.GetString(3000113), unicode, 1, font: 1)
                 {
-                    X = 158,
-                    Y = 330
+                    X = 158, Y = 330
                 }
             );
 
@@ -191,7 +184,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                                  )
                           .Where(s =>
                                     clientFlags.HasFlag(LockedFeatureFlags.ExpansionAOS) ||
-                                    (
+                                    (   
                                         s.Index != 51 && // Chivlary
                                         s.Index != 50 && // Focus
                                         s.Index != 49    // Necromancy
@@ -268,21 +261,17 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
             Add
             (
-                new Button((int)Buttons.Prev, 0x15A1, 0x15A3, 0x15A2)
+                new Button((int) Buttons.Prev, 0x15A1, 0x15A3, 0x15A2)
                 {
-                    X = 586,
-                    Y = 445,
-                    ButtonAction = ButtonAction.Activate
+                    X = 586, Y = 445, ButtonAction = ButtonAction.Activate
                 }
             );
 
             Add
             (
-                new Button((int)Buttons.Next, 0x15A4, 0x15A6, 0x15A5)
+                new Button((int) Buttons.Next, 0x15A4, 0x15A6, 0x15A5)
                 {
-                    X = 610,
-                    Y = 445,
-                    ButtonAction = ButtonAction.Activate
+                    X = 610, Y = 445, ButtonAction = ButtonAction.Activate
                 }
             );
 
@@ -313,7 +302,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
         {
             CharCreationGump charCreationGump = UIManager.GetGump<CharCreationGump>();
 
-            switch ((Buttons)buttonID)
+            switch ((Buttons) buttonID)
             {
                 case Buttons.Prev:
                     charCreationGump.StepBack();
@@ -329,16 +318,16 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                             if (_skillsCombobox[i].SelectedIndex != -1)
                             {
                                 Skill skill = _character.Skills[_skillList[_skillsCombobox[i].SelectedIndex].Index];
-                                skill.ValueFixed = (ushort)_skillSliders[i].Value;
+                                skill.ValueFixed = (ushort) _skillSliders[i].Value;
                                 skill.BaseFixed = 0;
                                 skill.CapFixed = 0;
                                 skill.Lock = Lock.Locked;
                             }
                         }
 
-                        _character.Strength = (ushort)_attributeSliders[0].Value;
-                        _character.Intelligence = (ushort)_attributeSliders[1].Value;
-                        _character.Dexterity = (ushort)_attributeSliders[2].Value;
+                        _character.Strength = (ushort) _attributeSliders[0].Value;
+                        _character.Intelligence = (ushort) _attributeSliders[1].Value;
+                        _character.Dexterity = (ushort) _attributeSliders[2].Value;
 
                         charCreationGump.SetAttributes(true);
                     }

@@ -46,7 +46,6 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
     {
         private PlayerMobile _character;
         private int _cityIndex;
-        private int _classSelected;
         private CharCreationStep _currentStep;
         private LoadingGump _loadingGump;
         private readonly LoginScene _loginScene;
@@ -68,15 +67,9 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             SetStep(CharCreationStep.ChooseProfession);
         }
 
-        
         public void SetAttributes(bool force = false)
         {
-            SetStep(CharCreationStep.ChooseTrade);
-        }
-
-        public void SetLastPage()
-        {
-            SetStep(CharCreationStep.ChooseCity);
+            SetStep(_selectedProfession.DescriptionIndex >= 0 || force ? CharCreationStep.ChooseCity : CharCreationStep.ChooseTrade);
         }
 
         public void SetCity(int cityIndex)
@@ -220,7 +213,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                         Remove(existing);
                     }
 
-                    Add(new CreateCharSelectionCityGump(_loginScene), 4);
+                    Add(new CreateCharSelectionCityGump((byte) _selectedProfession.DescriptionIndex, _loginScene), 4);
 
                     ChangePage(4);
 
@@ -231,8 +224,8 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
         private enum CharCreationStep
         {
             Appearence = 0,
-            ChooseProfession = 1, //classe
-            ChooseTrade = 2,      //transfer
+            ChooseProfession = 1,
+            ChooseTrade = 2,
             ChooseCity = 3
         }
     }
