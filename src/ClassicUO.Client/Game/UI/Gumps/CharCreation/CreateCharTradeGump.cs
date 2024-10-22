@@ -134,7 +134,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                     196,
                     93,
                     30,
-                    140,
+                    130,
                     ProfessionInfo._VoidStats[0],
                     HSliderBarStyle.MetalWidgetRecessedBar,
                     true
@@ -149,7 +149,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                     276,
                     93,
                     30,
-                    140,
+                    130,
                     ProfessionInfo._VoidStats[1],
                     HSliderBarStyle.MetalWidgetRecessedBar,
                     true
@@ -164,7 +164,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                     356,
                     93,
                     30,
-                    140,
+                    130,
                     ProfessionInfo._VoidStats[2],
                     HSliderBarStyle.MetalWidgetRecessedBar,
                     true
@@ -173,7 +173,12 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
             var clientFlags = World.ClientLockedFeatures.Flags;
 
+            var skillIndicesToInclude = new List<int> { 0, 7, 8, 10, 11, 12, 13, 18, 23, 30, 34, 35, 37, 39, 44, 45 }; //Indici skill lavorative
+
             _skillList = SkillsLoader.Instance.SortedSkills
+                         .Where(s =>
+                             skillIndicesToInclude.Contains(s.Index) // Filtra solo le skill con questi indici
+                         )
                          .Where(s =>
                                      // All standard client versions ignore these skills by defualt
                                      //s.Index != 26 && // MagicResist
@@ -248,8 +253,8 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                         344,
                         y + 32,
                         93,
-                        90,
-                        90,
+                        70,
+                        70,
                         ProfessionInfo._VoidSkills[i, 1],
                         HSliderBarStyle.MetalWidgetRecessedBar,
                         true
@@ -263,7 +268,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new Button((int) Buttons.Prev, 0x15A1, 0x15A3, 0x15A2)
                 {
-                    X = 15, Y = 445, ButtonAction = ButtonAction.Activate
+                    X = 586, Y = 445, ButtonAction = ButtonAction.Activate
                 }
             );
 

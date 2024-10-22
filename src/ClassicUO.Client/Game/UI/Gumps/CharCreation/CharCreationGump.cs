@@ -59,7 +59,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             CanCloseWithRightClick = false;
         }
 
-        internal static int _skillsCount => Client.Version >= ClientVersion.CV_70160 ? 4 : 3;
+        internal static int _skillsCount => Client.Version >= ClientVersion.CV_70160 ? 4 : 2; // 2 skill dopo selezione classe
 
         public void SetCharacter(PlayerMobile character)
         {
@@ -131,7 +131,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             _character.Intelligence = (ushort) _selectedProfession.StatsVal[1];
             _character.Dexterity = (ushort) _selectedProfession.StatsVal[2];
 
-            //SetAttributes();
+            //SetAttributes(); // forzatura selezione skill dopo classe
 
             SetStep(CharCreationStep.ChooseTrade);
         }
