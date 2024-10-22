@@ -487,15 +487,21 @@ namespace ClassicUO.Network
             }
 
             Item pants = character.FindItemByLayer(Layer.Pants);
+            Item skirt = character.FindItemByLayer(Layer.Skirt);
 
             if (pants != null)
             {
                 writer.WriteUInt16BE(pants.Hue);
             }
+            else if (skirt != null)
+            {
+                writer.WriteUInt16BE(skirt.Hue);
+            }
             else
             {
                 writer.WriteZero(2);
             }
+
 
             if (length < 0)
             {
