@@ -59,8 +59,6 @@ namespace ClassicUO.Game.Data
                 , 0x00A0, 0x00A1, 0x0095, 0x0096, 0x0097, 0x0098
         };
 
-
-
         private static readonly ushort[] GargoyleSkinTone =
         {
             0x06DA, 0x06DB, 0x06DC, 0x06DD, 0x06DE, 0x06DF, 0x06E0, 0x06E1, 0x06E2, 0x06E3, 0x06E4, 0x06E5, 0x06E6,
@@ -86,6 +84,13 @@ namespace ClassicUO.Game.Data
         {
             0x0708, 0x070A, 0x070C, 0x070E, 0x0710, 0x0762, 0x0764, 0x0767, 0x076A, 0x06F2, 0x06F0, 0x06EE, 0x06E3,
             0x06E1, 0x06DF, 0x0708, 0x070A, 0x070C
+        };
+        private static readonly ushort[] OrcHairColor =
+        {
+            0x044D, 0x0455, 0x045D, 0x0465, 0x046D, 0x0475, 0x044E, 0x0456, 0x045E, 0x0466, 0x046E, 0x0476, 0x044F,
+            0x0457, 0x045F, 0x0467, 0x046F, 0x0477, 0x0450, 0x0458, 0x0460, 0x0468, 0x0470, 0x0478, 0x0451, 0x0459,
+            0x0461, 0x0469, 0x0471, 0x0479, 0x0452, 0x045A, 0x0462, 0x046A, 0x0472, 0x047A, 0x0453, 0x045B, 0x0463,
+            0x046B, 0x0473, 0x047B, 0x0454, 0x045C, 0x0464, 0x046C, 0x0474, 0x047C
         };
         private static readonly int[] HumanHairLabels =
         {
@@ -151,6 +156,30 @@ namespace ClassicUO.Game.Data
         {
             0, 0x4261, 0x4262, 0x4273, 0x4274, 0x4275, 0x42AA, 0x42AB, 0x42B1
         };
+        private static readonly int[] OrcHairLabels =
+        {
+            3000340, 3000341, 3000342, 3000343, 3000344, 3000345, 3000346, 3000347, 3000348, 3000349
+        };
+        private static readonly int[] OrcHairGraphics =
+        {
+            0, 8251, 8252, 8253, 8260, 8261, 8266, 8263, 8264, 8265
+        };
+        private static readonly int[] OrcFacialLabels =
+        {
+            3000340, 3000351, 3000352, 3000353, 3000354, 1011060, 1011061, 3000357
+        };
+        private static readonly int[] OrcFacialGraphics =
+        {
+            0, 8256, 8254, 8255, 8257, 8267, 8268, 8269
+        };
+        private static readonly int[] OrcFemaleHairLabels =
+        {
+            3000340, 3000341, 3000342, 3000343, 3000344, 3000345, 3000346, 3000347, 3000349, 3000350
+        };
+        private static readonly int[] OrcFemaleHairGraphics =
+        {
+            0, 8251, 8252, 8253, 8260, 8261, 8266, 8263, 8265, 8262 //stesso umani
+        };
 
         public static ushort[] GetSkinPallet(RaceType race)
         {
@@ -178,7 +207,7 @@ namespace ClassicUO.Game.Data
 
                 case RaceType.ELF: return ElfHairColor;
 
-                case RaceType.ORC: return ElfHairColor;
+                case RaceType.ORC: return OrcHairColor;
 
                 case RaceType.GARGOYLE: return GargoyleHairColor;
             }
@@ -218,12 +247,12 @@ namespace ClassicUO.Game.Data
 
                     if (isFemale)
                     {
-                        return new ComboContent(ElfFemaleHairLabels, ElfFemaleHairGraphics);
+                        return new ComboContent(OrcFemaleHairLabels, OrcFemaleHairGraphics);
                     }
                     else
                     {
                     }
-                    return new ComboContent(HumanHairLabels, HumanHairGraphics);
+                    return new ComboContent(OrcHairLabels, OrcHairGraphics);
 
 
                 case RaceType.GARGOYLE:
@@ -257,7 +286,7 @@ namespace ClassicUO.Game.Data
 
                 case RaceType.ELF: return new ComboContent(HumanFacialLabels, HumanFacialGraphics);
 
-                case RaceType.ORC: return new ComboContent(HumanFacialLabels, HumanFacialGraphics);
+                case RaceType.ORC: return new ComboContent(OrcFacialLabels, OrcFacialGraphics);
 
                 case RaceType.GARGOYLE: return new ComboContent(GargoyleFacialLabels, GargoyleFacialGraphics);
             }

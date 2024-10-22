@@ -360,10 +360,6 @@ namespace ClassicUO.Game.UI.Gumps
             {
                 fakeMobile.Graphic = (ushort)(isFemale ? 0x0262 : 0x0261);
             }
-            else
-            {
-                fakeMobile.Graphic = (ushort)(isFemale ? 0x0191 : 0x0190);
-            }
 
             hair = CreateItem(0x4000_0000 + (int)Layer.Hair, 0, Layer.Hair);
             if (!isFemale && selectedRace != RaceType.ELF)
