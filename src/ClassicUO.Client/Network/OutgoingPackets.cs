@@ -37,6 +37,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading; //aggiunto per controllo azioni
+using System.Threading.Tasks;  //aggiunto per controllo azioni
 using ClassicUO.Configuration;
 using ClassicUO.Game;
 using ClassicUO.Game.Data;
@@ -51,8 +53,17 @@ namespace ClassicUO.Network
 {
     internal static class NetClientExt
     {
-        public static void Send_ACKTalk(this NetClient socket)
+        private static bool isSend_ACKTalkInProgress = false;
+        public static async Task Send_ACKTalk(this NetClient socket)
         {
+
+            if (isSend_ACKTalkInProgress)
+            {
+                return;
+            }
+
+            isSend_ACKTalkInProgress = true;
+
             const byte ID = 0x03;
 
             int length = PacketsTable.GetPacketLength(ID);
@@ -114,8 +125,9 @@ namespace ClassicUO.Network
             }
 
             socket.Send(writer.BufferWritten);
-
             writer.Dispose();
+            await Task.Delay(100);
+            isSend_ACKTalkInProgress = false;
         }
 
         public static void Send_Ping(this NetClient socket, byte idx)
@@ -149,8 +161,15 @@ namespace ClassicUO.Network
             writer.Dispose();
         }
 
-        public static void Send_DoubleClick(this NetClient socket, uint serial)
+        private static bool isDoubleClickInProgress = false;
+        public static async Task Send_DoubleClick(this NetClient socket, uint serial)
         {
+            if (isDoubleClickInProgress)
+            {
+                return;
+            }
+
+            isDoubleClickInProgress = true;
             const byte ID = 0x06;
 
             int length = PacketsTable.GetPacketLength(ID);
@@ -176,8 +195,9 @@ namespace ClassicUO.Network
             }
 
             socket.Send(writer.BufferWritten);
-
             writer.Dispose();
+            await Task.Delay(100);
+            isDoubleClickInProgress = false;
         }
 
         public static void Send_Seed
@@ -267,36 +287,53 @@ namespace ClassicUO.Network
         }
 
         public static void Send_SelectServer(this NetClient socket, byte index)
+
         {
-            const byte ID = 0xA0;
-
+            const byte ID = 0xA0; // ID del pacchetto di selezione del server
             int length = PacketsTable.GetPacketLength(ID);
-
             var writer = new StackDataWriter(length < 0 ? 64 : length);
-            writer.WriteUInt8(ID);
+            
+            writer.WriteUInt8(ID); // Inizio pacchetto
 
             if (length < 0)
             {
-                writer.WriteZero(2);
+                writer.WriteZero(2); // Riserva spazio per la lunghezza del pacchetto
             }
 
-            writer.WriteUInt8(0x00);
-            writer.WriteUInt8(index);
+            writer.WriteUInt8(0x00); // Byte opzionale o personalizzato
+            writer.WriteUInt8(index); // Scrive l'indice del server selezionato
 
             if (length < 0)
             {
                 writer.Seek(1, SeekOrigin.Begin);
-                writer.WriteUInt16BE((ushort) writer.BytesWritten);
+                
+                // Scriviamo il valore a 16 bit come due byte a 8 bit
+                writer.WriteUInt8((byte)((writer.BytesWritten >> 8) & 0xFF)); // Primo byte
+                writer.WriteUInt8((byte)(writer.BytesWritten & 0xFF));        // Secondo byte
             }
             else
             {
-                writer.WriteZero(length - writer.BytesWritten);
+                writer.WriteZero(length - writer.BytesWritten); // Riempi fino alla lunghezza prevista
             }
 
-            socket.Send(writer.BufferWritten);
-
-            writer.Dispose();
+            socket.Send(writer.BufferWritten); // Invio pacchetto di selezione del server
+            writer.Dispose(); // Rilascia risorse
+            
+            // Creazione e invio del pacchetto aggiuntivo 0x7E
+            const byte additionalPacketID = 0x7E;
+            var additionalWriter = new StackDataWriter(64); // Crea un writer per il nuovo pacchetto
+            additionalWriter.WriteUInt8(additionalPacketID); // ID del pacchetto aggiuntivo
+            
+            // Dati specifici del pacchetto
+            // Scriviamo 0x0001 (16 bit) come due byte separati
+            additionalWriter.WriteUInt8(0x00); // Primo byte
+            additionalWriter.WriteUInt8(0x01); // Secondo byte
+            
+            socket.Send(additionalWriter.BufferWritten); // Invio pacchetto aggiuntivo
+            additionalWriter.Dispose(); // Rilascia risorse
         }
+
+
 
         public static void Send_SecondLogin(this NetClient socket, string user, string psw, uint seed)
         {
@@ -1082,8 +1119,15 @@ namespace ClassicUO.Network
             writer.Dispose();
         }
 
-        public static void Send_CastSpell(this NetClient socket, int idx)
+        private static bool isSend_CastSpellInProgress = false;
+        public static async Task Send_CastSpell(this NetClient socket, int idx)
         {
+            if (isSend_CastSpellInProgress)
+            {
+                return;
+            }
+
+            isSend_CastSpellInProgress = true;
             const byte ID = 0xBF;
             const byte ID_OLD = 0x12;
 
@@ -1129,10 +1173,19 @@ namespace ClassicUO.Network
 
             socket.Send(writer.BufferWritten);
             writer.Dispose();
+            await Task.Delay(100);
+            isSend_CastSpellInProgress = false;
         }
 
-        public static void Send_CastSpellFromBook(this NetClient socket, int idx, uint serial)
+        private static bool isCastSpellFromBookInProgress = false;
+        public static async Task Send_CastSpellFromBook(this NetClient socket, int idx, uint serial)
         {
+            if (isCastSpellFromBookInProgress)
+            {
+                return;
+            }
+
+            isCastSpellFromBookInProgress = true;
             const byte ID = 0x12;
 
             int length = PacketsTable.GetPacketLength(ID);
@@ -1161,10 +1214,19 @@ namespace ClassicUO.Network
 
             socket.Send(writer.BufferWritten);
             writer.Dispose();
+            await Task.Delay(100);
+            isCastSpellFromBookInProgress = false;
         }
 
-        public static void Send_UseSkill(this NetClient socket, int idx)
+        private static bool isSend_UseSkillInProgress = false;
+        public static async Task Send_UseSkill(this NetClient socket, int idx)
         {
+            if (isSend_UseSkillInProgress)
+            {
+                return;
+            }
+
+            isSend_UseSkillInProgress = true;
             const byte ID = 0x12;
 
             int length = PacketsTable.GetPacketLength(ID);
@@ -1193,14 +1255,22 @@ namespace ClassicUO.Network
 
             socket.Send(writer.BufferWritten);
             writer.Dispose();
+            await Task.Delay(100);
+            isSend_UseSkillInProgress = false;
         }
 
-        public static void Send_OpenDoor(this NetClient socket)
+        private static bool isSend_OpenDoorInProgress = false;
+        public static async Task Send_OpenDoor(this NetClient socket)
         {
+            if (isSend_OpenDoorInProgress)
+            {
+                return;
+            }
+
+            isSend_OpenDoorInProgress = true;
+
             const byte ID = 0x12;
-
             int length = PacketsTable.GetPacketLength(ID);
-
             var writer = new StackDataWriter(length < 0 ? 64 : length);
 
             writer.WriteUInt8(ID);
@@ -1216,7 +1286,7 @@ namespace ClassicUO.Network
             if (length < 0)
             {
                 writer.Seek(1, SeekOrigin.Begin);
-                writer.WriteUInt16BE((ushort) writer.BytesWritten);
+                writer.WriteUInt16BE((ushort)writer.BytesWritten);
             }
             else
             {
@@ -1225,7 +1295,10 @@ namespace ClassicUO.Network
 
             socket.Send(writer.BufferWritten);
             writer.Dispose();
+            await Task.Delay(500);
+            isSend_OpenDoorInProgress = false;
         }
+
 
         public static void Send_OpenSpellBook(this NetClient socket, byte type)
         {
@@ -1259,8 +1332,15 @@ namespace ClassicUO.Network
             writer.Dispose();
         }
 
-        public static void Send_EmoteAction(this NetClient socket, string action)
+        private static bool isSend_EmoteActionInProgress = false;
+        public static async Task Send_EmoteAction(this NetClient socket, string action)
         {
+            if (isSend_EmoteActionInProgress)
+            {
+                return;
+            }
+
+            isSend_EmoteActionInProgress = true;
             const byte ID = 0x12;
 
             int length = PacketsTable.GetPacketLength(ID);
@@ -1289,6 +1369,8 @@ namespace ClassicUO.Network
 
             socket.Send(writer.BufferWritten);
             writer.Dispose();
+            await Task.Delay(100);
+            isSend_EmoteActionInProgress = false;
         }
 
         public static void Send_GumpResponse

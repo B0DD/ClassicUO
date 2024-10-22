@@ -131,9 +131,9 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             _character.Intelligence = (ushort) _selectedProfession.StatsVal[1];
             _character.Dexterity = (ushort) _selectedProfession.StatsVal[2];
 
-            SetAttributes();
+            //SetAttributes();
 
-            SetStep(_selectedProfession.DescriptionIndex > 0 ? CharCreationStep.ChooseCity : CharCreationStep.ChooseTrade);
+            SetStep(CharCreationStep.ChooseTrade);
         }
 
         public void CreateCharacter(byte profession)
