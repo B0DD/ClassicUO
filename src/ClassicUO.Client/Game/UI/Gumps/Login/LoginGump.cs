@@ -180,7 +180,7 @@ namespace ClassicUO.Game.UI.Gumps.Login
                     (
                         0x00D2,
                         0x00D3,
-                        "Auto",
+                        "AutoLogin",
                         //ResGumps.Autologin,
                         1,
                         0x0386,
@@ -198,14 +198,14 @@ namespace ClassicUO.Game.UI.Gumps.Login
                     (
                         0x00D2,
                         0x00D3,
-                        "Save",
+                        "Save Account",
                         //ResGumps.SaveAccount,
                         1,
                         0x0386,
                         false
                     )
                     {
-                        X = _checkboxAutologin.X + _checkboxAutologin.Width + 10,
+                        X = _checkboxAutologin.X + _checkboxAutologin.Width + 25,
                         Y = 417
                     }
                 );
@@ -517,7 +517,7 @@ namespace ClassicUO.Game.UI.Gumps.Login
                 IsChecked = Settings.GlobalSettings.LoginMusic
             };
 
-            Add(loginmusic_checkbox);
+            //Add(loginmusic_checkbox);
 
             HSliderBar login_music = new HSliderBar
             (
@@ -525,7 +525,7 @@ namespace ClassicUO.Game.UI.Gumps.Login
                 loginmusic_checkbox.Y + 4,
                 80,
                 0,
-                100,
+                0,
                 Settings.GlobalSettings.LoginMusicVolume,
                 HSliderBarStyle.MetalWidgetRecessedBar,
                 true,

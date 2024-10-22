@@ -109,7 +109,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             (
                 new Button((int) Buttons.Prev, 0x15A1, 0x15A3, 0x15A2)
                 {
-                    X = 586,
+                    X = 15,
                     Y = 445,
                     ButtonAction = ButtonAction.Activate
                 }

@@ -122,9 +122,9 @@ namespace ClassicUO.Assets
                     Professions[new ProfessionInfo
                     {
                         Name = "Warrior",
-                        Localization = 1061176,
+                        Localization = 1062948,
                         Description = 1062950,
-                        Graphic = 5591,
+                        Graphic = 5577,
                         TopLevel = true,
                         Type = PROF_TYPE.PROFESSION,
                         DescriptionIndex = 1,
@@ -134,9 +134,9 @@ namespace ClassicUO.Assets
                     Professions[new ProfessionInfo
                     {
                         Name = "Warmage",
-                        Localization = 1061176,
-                        Description = 1062950,
-                        Graphic = 5591,
+                        Localization = 1062949,
+                        Description = 1062951,
+                        Graphic = 5585,
                         TopLevel = true,
                         Type = PROF_TYPE.PROFESSION,
                         DescriptionIndex = 2,
@@ -146,9 +146,9 @@ namespace ClassicUO.Assets
                     Professions[new ProfessionInfo
                     {
                         Name = "Mage",
-                        Localization = 1061176,
-                        Description = 1062950,
-                        Graphic = 5589,
+                        Localization = 1061177,
+                        Description = 1061227,
+                        Graphic = 5569,
                         TopLevel = true,
                         Type = PROF_TYPE.PROFESSION,
                         DescriptionIndex = 3,
@@ -158,9 +158,9 @@ namespace ClassicUO.Assets
                     Professions[new ProfessionInfo
                     {
                         Name = "Ranger",
-                        Localization = 1061176,
-                        Description = 1062950,
-                        Graphic = 5587,
+                        Localization = 1061178,
+                        Description = 1061228,
+                        Graphic = 5575,
                         TopLevel = true,
                         Type = PROF_TYPE.PROFESSION,
                         DescriptionIndex = 4,
@@ -170,9 +170,9 @@ namespace ClassicUO.Assets
                     Professions[new ProfessionInfo
                     {
                         Name = "Archer",
-                        Localization = 1061176,
-                        Description = 1062950,
-                        Graphic = 5577,
+                        Localization = 1061180,
+                        Description = 1061230,
+                        Graphic = 5551,
                         TopLevel = true,
                         Type = PROF_TYPE.PROFESSION,
                         DescriptionIndex = 5,
@@ -182,9 +182,9 @@ namespace ClassicUO.Assets
                     Professions[new ProfessionInfo
                     {
                         Name = "Cleric",
-                        Localization = 1061176,
-                        Description = 1062950,
-                        Graphic = 5569,
+                        Localization = 1061179,
+                        Description = 1061229,
+                        Graphic = 5563,
                         TopLevel = true,
                         Type = PROF_TYPE.PROFESSION,
                         DescriptionIndex = 6,
@@ -194,9 +194,9 @@ namespace ClassicUO.Assets
                     Professions[new ProfessionInfo
                     {
                         Name = "Thief",
-                        Localization = 1061176,
-                        Description = 1062950,
-                        Graphic = 5555,
+                        Localization = 1061181,
+                        Description = 1061231,
+                        Graphic = 5561,
                         TopLevel = true,
                         Type = PROF_TYPE.PROFESSION,
                         DescriptionIndex = 7,
