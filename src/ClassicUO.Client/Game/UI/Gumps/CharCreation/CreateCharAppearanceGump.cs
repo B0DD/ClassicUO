@@ -307,7 +307,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                     it = CreateItem(0x1710, 0x0384, Layer.Shoes);
                     _character.PushToBack(it);
 
-                    it = CreateItem(0x1531, CurrentColorOption[Layer.Pants].Item2, Layer.Skirt);
+                    it = CreateItem(0x152F, CurrentColorOption[Layer.Pants].Item2, Layer.Skirt);
 
                     _character.PushToBack(it);
 
@@ -338,7 +338,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                     it = CreateItem(0x1710, 0x0384, Layer.Shoes);
                     _character.PushToBack(it);
 
-                    it = CreateItem(0x1531, CurrentColorOption[Layer.Pants].Item2, Layer.Skirt);
+                    it = CreateItem(0x152F, CurrentColorOption[Layer.Pants].Item2, Layer.Skirt);
 
                     _character.PushToBack(it);
 
@@ -372,7 +372,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                         it = CreateItem(0x1710, 0x0384, Layer.Shoes);
                         _character.PushToBack(it);
 
-                        it = CreateItem(0x1531, CurrentColorOption[Layer.Pants].Item2, Layer.Pants);
+                        it = CreateItem(0x152F, CurrentColorOption[Layer.Pants].Item2, Layer.Pants);
 
                         _character.PushToBack(it);
 
