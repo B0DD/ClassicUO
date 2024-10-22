@@ -90,45 +90,117 @@ namespace ClassicUO.Assets
 
                     FileInfo file = new FileInfo(UOFileManager.GetUOFilePath("Prof.txt"));
 
-                    if (file.Exists)
-                    {
-                        if (file.Length > 0x100000) //1megabyte limit of string file
-                        {
-                            throw new InternalBufferOverflowException($"{file.FullName} exceeds the maximum 1Megabyte allowed size for a string text file, please, check that the file is correct and not corrupted -> {file.Length} file size");
-                        }
+                    //if (file.Exists)
+                    //{
+                    //    if (file.Length > 0x100000) //1megabyte limit of string file
+                    //    {
+                    //        throw new InternalBufferOverflowException($"{file.FullName} exceeds the maximum 1Megabyte allowed size for a string text file, please, check that the file is correct and not corrupted -> {file.Length} file size");
+                    //    }
 
                         //what if file doesn't exist? we skip section completely...directly into advanced selection
-                        TextFileParser read = new TextFileParser(File.ReadAllText(file.FullName), new[] { ' ', '\t', ',' }, new[] { '#', ';' }, new[] { '"', '"' });
+                    //    TextFileParser read = new TextFileParser(File.ReadAllText(file.FullName), new[] { ' ', '\t', ',' }, new[] { '#', ';' }, new[] { '"', '"' });
 
-                        while (!read.IsEOF())
-                        {
-                            List<string> strings = read.ReadTokens();
+                    //    while (!read.IsEOF())
+                    //    {
+                    //        List<string> strings = read.ReadTokens();
 
-                            if (strings.Count > 0)
-                            {
-                                if (strings[0].ToLower() == "begin")
-                                {
-                                    result = ParseFilePart(read);
+                    //        if (strings.Count > 0)
+                    //        {
+                    //            if (strings[0].ToLower() == "begin")
+                    //            {
+                    //                result = ParseFilePart(read);
 
-                                    if (!result)
-                                    {
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    //                if (!result)
+                    //                {
+                    //                    break;
+                     //               }
+                    //            }
+                    //        }
+                    //    }
+                    //}
 
                     Professions[new ProfessionInfo
                     {
-                        Name = "Advanced",
+                        Name = "Warrior",
                         Localization = 1061176,
-                        Description = 1061226,
-                        Graphic = 5545,
+                        Description = 1062950,
+                        Graphic = 5591,
                         TopLevel = true,
                         Type = PROF_TYPE.PROFESSION,
-                        DescriptionIndex = -1,
-                        TrueName = "advanced"
+                        DescriptionIndex = 1,
+                        TrueName = "Warrior"
+                    }] = null;
+
+                    Professions[new ProfessionInfo
+                    {
+                        Name = "Warmage",
+                        Localization = 1061176,
+                        Description = 1062950,
+                        Graphic = 5591,
+                        TopLevel = true,
+                        Type = PROF_TYPE.PROFESSION,
+                        DescriptionIndex = 2,
+                        TrueName = "Warmage"
+                    }] = null;
+
+                    Professions[new ProfessionInfo
+                    {
+                        Name = "Mage",
+                        Localization = 1061176,
+                        Description = 1062950,
+                        Graphic = 5589,
+                        TopLevel = true,
+                        Type = PROF_TYPE.PROFESSION,
+                        DescriptionIndex = 3,
+                        TrueName = "Mage"
+                    }] = null;
+
+                    Professions[new ProfessionInfo
+                    {
+                        Name = "Ranger",
+                        Localization = 1061176,
+                        Description = 1062950,
+                        Graphic = 5587,
+                        TopLevel = true,
+                        Type = PROF_TYPE.PROFESSION,
+                        DescriptionIndex = 4,
+                        TrueName = "Ranger"
+                    }] = null;
+
+                    Professions[new ProfessionInfo
+                    {
+                        Name = "Archer",
+                        Localization = 1061176,
+                        Description = 1062950,
+                        Graphic = 5577,
+                        TopLevel = true,
+                        Type = PROF_TYPE.PROFESSION,
+                        DescriptionIndex = 5,
+                        TrueName = "Archer"
+                    }] = null;
+
+                    Professions[new ProfessionInfo
+                    {
+                        Name = "Cleric",
+                        Localization = 1061176,
+                        Description = 1062950,
+                        Graphic = 5569,
+                        TopLevel = true,
+                        Type = PROF_TYPE.PROFESSION,
+                        DescriptionIndex = 6,
+                        TrueName = "Cleric"
+                    }] = null;
+
+                    Professions[new ProfessionInfo
+                    {
+                        Name = "Thief",
+                        Localization = 1061176,
+                        Description = 1062950,
+                        Graphic = 5555,
+                        TopLevel = true,
+                        Type = PROF_TYPE.PROFESSION,
+                        DescriptionIndex = 7,
+                        TrueName = "Thief"
                     }] = null;
 
                     foreach (KeyValuePair<ProfessionInfo, List<ProfessionInfo>> kvp in Professions)
