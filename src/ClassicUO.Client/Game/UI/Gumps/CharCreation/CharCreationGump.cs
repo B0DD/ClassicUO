@@ -59,7 +59,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             CanCloseWithRightClick = false;
         }
 
-        internal static int _skillsCount => Client.Version >= ClientVersion.CV_70160 ? 4 : 2; // 2 skill dopo selezione classe
+        internal static int _skillsCount => Client.Version >= ClientVersion.CV_70160 ? 2 : 2; // 2 skill dopo selezione classe
 
         public void SetCharacter(PlayerMobile character)
         {

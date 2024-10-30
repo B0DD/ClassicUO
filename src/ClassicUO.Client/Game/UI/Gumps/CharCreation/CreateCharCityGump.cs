@@ -78,19 +78,19 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
             CityInfo city;
 
-            if (Client.Version >= ClientVersion.CV_70130)
-            {
-                city = scene.GetCity(0);
-            }
-            else
-            {
+            //if (Client.Version >= ClientVersion.CV_70130)
+            //{
+            //    city = scene.GetCity(0);
+            //}
+            //else
+            //{
                 city = scene.GetCity(3);
 
                 if (city == null)
                 {
                     city = scene.GetCity(0);
                 }
-            }
+           // }
 
             if (city == null)
             {
@@ -121,13 +121,13 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             };
 
 
-            if (Client.Version >= ClientVersion.CV_70130)
-            {
-                Add(new GumpPic(62, 54, (ushort) (0x15D9 + map), 0));
-                Add(new GumpPic(57, 49, 0x15DF, 0));
-                _facetName.Text = _cityNames[map];
-            }
-            else
+            //if (Client.Version >= ClientVersion.CV_70130)
+            //{
+            //    Add(new GumpPic(62, 54, (ushort) (0x15D9 + map), 0));
+            //    Add(new GumpPic(57, 49, 0x15DF, 0));
+            //    _facetName.Text = _cityNames[map];
+            //}
+            //else
             {
                 Add(new GumpPic(57, 49, 0x1598, 0));
                 _facetName.IsVisible = false;

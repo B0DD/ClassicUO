@@ -211,26 +211,26 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 1
             );
 
-            if (Client.Version >= ClientVersion.CV_60144)
-            {
-                Add
-                (
-                    _gargoyleRadio = new Button((int)Buttons.GargoyleButton, 0x0768, 0x0767)
-                    {
-                        X = 60, Y = 435, ButtonAction = ButtonAction.Activate
-                    },
-                    1
-                );
+            //if (Client.Version >= ClientVersion.CV_60144)
+            //{
+            //    Add
+            //    (
+            //        _gargoyleRadio = new Button((int)Buttons.GargoyleButton, 0x0768, 0x0767)
+            //        {
+            //            X = 60, Y = 435, ButtonAction = ButtonAction.Activate
+            //        },
+            //        1
+            //    );
 
-                Add
-                (
-                    new Button((int) Buttons.GargoyleButton, 0x07D3, 0x07D5, 0x07D4)
-                    {
-                        X = 80, Y = 435, ButtonAction = ButtonAction.Activate
-                    },
-                    1
-                );
-            }
+            //    Add
+            //    (
+            //        new Button((int) Buttons.GargoyleButton, 0x07D3, 0x07D5, 0x07D4)
+            //        {
+            //            X = 80, Y = 435, ButtonAction = ButtonAction.Activate
+            //        },
+            //        1
+            //    );
+            //}
 
             // Prev/Next
             Add

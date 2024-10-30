@@ -86,7 +86,7 @@ namespace ClassicUO.Configuration
         // sounds
         public bool EnableSound { get; set; } = true;
         public int SoundVolume { get; set; } = 100;
-        public bool EnableMusic { get; set; } = true;
+        public bool EnableMusic { get; set; } = false; // ha rotto il cazzo sta musica
         public int MusicVolume { get; set; } = 100;
         public bool EnableFootstepsSound { get; set; } = true;
         public bool EnableCombatMusic { get; set; } = true;
