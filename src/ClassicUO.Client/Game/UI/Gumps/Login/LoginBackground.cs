@@ -77,6 +77,7 @@ namespace ClassicUO.Game.UI.Gumps.Login
                 // UO Flag
                 Add(new GumpPic(0, 4, 0x15A0, 0) { AcceptKeyboardInput = false });
 
+                /*
                 // Quit Button
                 Add
                 (
@@ -88,6 +89,7 @@ namespace ClassicUO.Game.UI.Gumps.Login
                         AcceptKeyboardInput = false
                     }
                 );
+                */
             }
 
 
