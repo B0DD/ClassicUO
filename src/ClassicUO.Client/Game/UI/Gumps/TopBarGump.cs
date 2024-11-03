@@ -187,7 +187,7 @@ namespace ClassicUO.Game.UI.Gumps
                     0x098D,
                     0x098D,
                     0x098D,
-                    "More +",
+                    "Other..",
                     1,
                     true,
                     0,
@@ -201,21 +201,39 @@ namespace ClassicUO.Game.UI.Gumps
                 },
                 1
             );
+            //Client Commands
             moreMenu.ContextMenu = new ContextMenuControl();
             moreMenu.MouseUp += (s, e) => { moreMenu.ContextMenu?.Show(); };
             moreMenu.ContextMenu.Add(new ContextMenuItemEntry(Language.Instance.TopBarGump.CommandsEntry, () =>
             {
                 UIManager.Add(new CommandsGump());
             }));
-            moreMenu.ContextMenu.Add(new ContextMenuItemEntry(cliloc.GetString(1079449, ResGumps.Info), () =>
+            //Macroaway
+            moreMenu.ContextMenu.Add(new ContextMenuItemEntry("Macroaway", () =>
             {
-                if (TargetManager.IsTargeting)
-                {
-                    TargetManager.CancelTarget();
-                }
-
-                TargetManager.SetTargeting(CursorTarget.SetTargetClientSide, CursorType.Target, TargetType.Neutral);
+                GameActions.Say(".macroaway");
             }));
+            //GPS
+            moreMenu.ContextMenu.Add(new ContextMenuItemEntry("GPS", () =>
+            {
+                GameActions.Say(".gps");
+            }));
+            //OpenQuest            
+            moreMenu.ContextMenu.Add(new ContextMenuItemEntry("Quest", () =>
+            {
+                GameActions.Say(".openquest");
+            }));
+            //OpenQuest            
+            moreMenu.ContextMenu.Add(new ContextMenuItemEntry("Daily Quests", () =>
+            {
+                GameActions.Say(".openquestlog");
+            }));
+            //Last Hera       
+            moreMenu.ContextMenu.Add(new ContextMenuItemEntry("Last Hera Store", () =>
+            {
+                GameActions.Say(".uostore");
+            }));
+            //Debug
             moreMenu.ContextMenu.Add(new ContextMenuItemEntry(cliloc.GetString(1042237, ResGumps.Debug), () =>
             {
                 DebugGump debugGump = UIManager.GetGump<DebugGump>();
@@ -231,6 +249,7 @@ namespace ClassicUO.Game.UI.Gumps
                     debugGump.SetInScreen();
                 }
             }));
+            //Connection
             moreMenu.ContextMenu.Add(new ContextMenuItemEntry(cliloc.GetString(3000169, ResGumps.NetStats), () =>
             {
                 NetworkStatsGump netstatsgump = UIManager.GetGump<NetworkStatsGump>();
@@ -246,7 +265,9 @@ namespace ClassicUO.Game.UI.Gumps
                     netstatsgump.SetInScreen();
                 }
             }));
+            //Help
             moreMenu.ContextMenu.Add(new ContextMenuItemEntry(cliloc.GetString(3000134, ResGumps.Help), () => { GameActions.RequestHelp(); }));
+            //Boat Control
             //moreMenu.ContextMenu.Add(new ContextMenuItemEntry("Open boat control", () => { UIManager.Add(new BoatControl() { X = 200, Y = 200 }); }));
 
             startX += largeWidth + 1;

@@ -15,7 +15,7 @@ namespace ClassicUO.Configuration
         public string CurrentVersion { get; set; } = "Current Version: ";
         public string TazUOWiki { get; set; } = "TazUO Wiki";
         public string TazUODiscord { get; set; } = "TazUO Discord";
-        public string CommandGump { get; set; } = "Available Client Commands";
+        public string CommandGump { get; set; } = "Last Hera Commands";
 
         [JsonIgnore]
         public static Language Instance { get; private set; } = new Language();
