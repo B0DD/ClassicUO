@@ -33,11 +33,11 @@ namespace ClassicUO.Game.Managers
 
                         if (MainReleaseData != null)
                         {
-                            if (MainReleaseData.tag_name.StartsWith("v"))
+                            /*if (MainReleaseData.tag_name.StartsWith("v"))
                             {
                                 MainReleaseData.tag_name = MainReleaseData.tag_name.Substring(1);
                             }
-
+                            */
                             if (Version.TryParse(MainReleaseData.tag_name, out var version))
                             {
                                 if(version > CUOEnviroment.Version)

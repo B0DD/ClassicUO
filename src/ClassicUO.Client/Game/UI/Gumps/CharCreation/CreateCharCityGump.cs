@@ -128,6 +128,8 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             //    _facetName.Text = _cityNames[map];
             //}
             //else
+
+            //Mappa di sosaria - dec 5528
             {
                 Add(new GumpPic(57, 49, 0x1598, 0));
                 _facetName.IsVisible = false;
@@ -161,6 +163,14 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 }
             );
 
+            Add
+            (                
+                new Label("Let your story begin", false, 0xFFFF, font:2)
+                {
+                    X = 220,
+                    Y = 17
+                }
+            );
 
             _htmlControl = new HtmlControl
             (
@@ -171,8 +181,9 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                 true,
                 true,
                 ishtml: true,
-                text: city.Description
+                text: "MAGINCIA\nThe Last Bastion\nOnce known as the island of commerce and culture, now stands as the final bastion of Sosaria's shattered world. Following the cataclysmic purge by the Founder, it is the only refuge where remnants of humanity, half-elves, and half-orcs managed to survive, shielded by the magical barrier erected by the legendary archmage Hera.\r\n\r\nFor decades, its people have lived in a delicate balance, united by the myth of Hera and the teachings of the Church of the Founder, which offers redemption for the sins of the past. However, tensions simmer beneath the surface. Divisions rooted in race, politics, and scarcity of resources have begun to emerge, threatening the fragile peace.\r\n\r\nBeyond the safety of Magincia’s shores lie darkened waters and abominations spawned by the multiverse’s chaos, ever seeking to break through the island’s defenses. The city's inhabitants have formed a guard to defend against these terrors, and some now explore the ruins of nearby lands, like the desolate island of Occlo, in search of much-needed resources.\r\n\r\nYour story begins here, in a city not only fighting for survival but also for the hope that Sosaria can one day rise from the ashes of destruction."
             );
+            
 
             Add(_htmlControl);
 
@@ -202,8 +213,8 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
                         cityFacet = 5;
                     }
 
-                    x = 62 + MathHelper.PercetangeOf(MapLoader.Instance.MapsDefaultSize[cityFacet, 0] - 2048, c.X, 383);
-                    y = 54 + MathHelper.PercetangeOf(MapLoader.Instance.MapsDefaultSize[cityFacet, 1], c.Y, 384);
+                    x = 62 + MathHelper.PercetangeOf(MapLoader.Instance.MapsDefaultSize[cityFacet, 0] - 2048, c.X, 300);
+                    y = 54 + MathHelper.PercetangeOf(MapLoader.Instance.MapsDefaultSize[cityFacet, 1], c.Y, 380);
                 }
                 else if (i < _townButtonsText.Length)
                 {
@@ -218,7 +229,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
 
                 if (CUOEnviroment.IsOutlands)
                 {
-                    control.IsVisible = false;
+                   // control.IsVisible = false;
                 }
             }
 
@@ -239,7 +250,7 @@ namespace ClassicUO.Game.UI.Gumps.CharCreation
             }
 
             _selectedCity = city;
-            _htmlControl.Text = city.Description;
+            //_htmlControl.Text = city.Description;
             SetFacet(city.Map);
         }
 
