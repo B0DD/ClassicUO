@@ -45,6 +45,7 @@ namespace ClassicUO.Game.Data
         SpidersSilk,
 
         // pagan reagents
+        Obsidian,
         BatWing,
         GraveDust,
         DaemonBlood,

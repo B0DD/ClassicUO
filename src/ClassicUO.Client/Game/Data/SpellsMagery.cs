@@ -489,7 +489,8 @@ namespace ClassicUO.Game.Data
                         TargetType.Neutral,
                         Reagents.BlackPearl,
                         Reagents.MandrakeRoot,
-                        Reagents.Nightshade
+                        Reagents.Nightshade,
+                        Reagents.Obsidian
                     )
                 },
                 {
@@ -657,7 +658,8 @@ namespace ClassicUO.Game.Data
                         TargetType.Neutral,
                         Reagents.BlackPearl,
                         Reagents.Bloodmoss,
-                        Reagents.MandrakeRoot
+                        Reagents.MandrakeRoot,
+                        Reagents.Obsidian
                     )
                 },
                 {
@@ -686,7 +688,8 @@ namespace ClassicUO.Game.Data
                         TargetType.Neutral,
                         Reagents.BlackPearl,
                         Reagents.Ginseng,
-                        Reagents.SpidersSilk
+                        Reagents.SpidersSilk,
+                        Reagents.BatWing
                     )
                 },
                 {
@@ -847,7 +850,7 @@ namespace ClassicUO.Game.Data
                         Reagents.BlackPearl,
                         Reagents.Bloodmoss,
                         Reagents.MandrakeRoot,
-                        Reagents.Nightshade
+                        Reagents.BatWing
                     )
                 },
                 {
@@ -890,7 +893,8 @@ namespace ClassicUO.Game.Data
                         Reagents.Bloodmoss,
                         Reagents.MandrakeRoot,
                         Reagents.SpidersSilk,
-                        Reagents.SulfurousAsh
+                        Reagents.SulfurousAsh,
+                        Reagents.Obsidian
                     )
                 },
                 {
