@@ -296,7 +296,7 @@ namespace ClassicUO.Game.UI.Gumps
                 }
                 _warModeBtn.ScaleWidthAndHeight(Scale).ScaleXAndY(Scale).SetInternalScale(Scale);
 
-                int profileX = settings.Position_X_Profile;
+                int profileX = settings.Position_X_Profile - 15;
 
                 if (showRacialAbilitiesBook)
                 {
@@ -412,7 +412,7 @@ namespace ClassicUO.Game.UI.Gumps
             }
 
             // Name and title
-            _titleLabel = new Label("", false, settings.Hue_Title, settings.Size_Width_Hue, font: 1) { X = settings.Position_X_Title, Y = settings.Position_Y_Title };
+            _titleLabel = new Label("", false, settings.Hue_Title, settings.Size_Width_Hue, font: 1) { X = settings.Position_X_Title, Y = settings.Position_Y_Title + 4 };
             _titleLabel.ScaleWidthAndHeight(Scale).ScaleXAndY(Scale).SetInternalScale(Scale);
 
             Add(_titleLabel);
