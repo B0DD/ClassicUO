@@ -2561,21 +2561,24 @@ namespace ClassicUO.Game.UI.Gumps
                     if (partyMember != null && SerialHelper.IsValid(partyMember.Serial))
                     {
                         Mobile mob = World.Mobiles.Get(partyMember.Serial);
+                        WMapEntity wme = World.WMapManager.GetEntity(partyMember.Serial);
 
+                        // Se il Mobile è visibile
                         if (mob != null && mob.Distance <= World.ClientViewRange)
                         {
-                            WMapEntity wme = World.WMapManager.GetEntity(mob);
+                            partyMember.X = mob.X;
+                            partyMember.Y = mob.Y;
 
-                            if (wme != null)
+                            if (wme == null)
                             {
-                                if (string.IsNullOrEmpty(wme.Name) && !string.IsNullOrEmpty(partyMember.Name))
+                                wme = new WMapEntity(partyMember.Serial)
                                 {
-                                    wme.Name = partyMember.Name;
-                                }
+                                    Name = partyMember.Name
+                                };
+                                World.WMapManager.Entities.Add(partyMember.Serial, wme);
                             }
 
-                            DrawMobile
-                            (
+                            DrawMobile(
                                 batcher,
                                 mob,
                                 gX,
@@ -2591,21 +2594,35 @@ namespace ClassicUO.Game.UI.Gumps
                         }
                         else
                         {
-                            WMapEntity wme = World.WMapManager.GetEntity(partyMember.Serial);
-
-                            if (wme != null && !wme.IsGuild)
+                            // Se il Mobile non è visibile, usa le coordinate di PartyMember
+                            if (wme == null)
                             {
-                                DrawWMEntity
-                                (
-                                    batcher,
-                                    wme,
-                                    gX,
-                                    gY,
-                                    halfWidth,
-                                    halfHeight,
-                                    Zoom
-                                );
+                                wme = new WMapEntity(partyMember.Serial)
+                                {
+                                    X = partyMember.X, // Usa le coordinate X di PartyMember
+                                    Y = partyMember.Y, // Usa le coordinate Y di PartyMember
+                                    Name = partyMember.Name
+                                };
+                                World.WMapManager.Entities.Add(partyMember.Serial, wme);
                             }
+                            else
+                            {
+                                if (partyMember.X != 0 || partyMember.Y != 0)
+                                {
+                                    wme.X = partyMember.X;
+                                    wme.Y = partyMember.Y;
+                                }
+                            }
+
+                            DrawWMEntity(
+                                batcher,
+                                wme,
+                                gX,
+                                gY,
+                                halfWidth,
+                                halfHeight,
+                                Zoom
+                            );
                         }
                     }
                 }
