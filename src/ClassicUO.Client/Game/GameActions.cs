@@ -42,7 +42,6 @@ using ClassicUO.Resources;
 using ClassicUO.Utility;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
 using static ClassicUO.Network.NetClient;
 
 namespace ClassicUO.Game
@@ -373,33 +372,12 @@ namespace ClassicUO.Game
             }
         }
 
-        private static readonly Dictionary<string, (string EmoteText, int? SoundId)> EmoteMappings = new Dictionary<string, (string, int?)>
-        {
-            { "xd", ("*Laugh*", 801) },
-            { "lol", ("*Laugh*", 1073) },
-            { "ciao", ("*Saluta*", null) }, 
-            { "pd", ("*borbotta*", 605) },             
-        };
-
         public static void Say(string message, ushort hue = 0xFFFF, MessageType type = MessageType.Regular, byte font = 3)
         {
-            if (EmoteMappings.TryGetValue(message.ToLower(), out var emoteData))
+            if (hue == 0xFFFF)
             {
-                string emoteText = emoteData.EmoteText;
-                int? soundId = emoteData.SoundId;
-
-                
-                message = emoteText;
-                type = MessageType.Emote; 
-                hue = ProfileManager.CurrentProfile.EmoteHue; 
-
-                
-                if (soundId.HasValue)
-                {
-                    Client.Game.Audio.PlaySound(soundId.Value);
-                }
+                hue = ProfileManager.CurrentProfile.SpeechHue;
             }
-
 
             // TODO: identify what means 'older client' that uses ASCIISpeechRquest [0x03]
             // 
