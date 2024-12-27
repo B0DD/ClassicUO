@@ -378,6 +378,7 @@ namespace ClassicUO.Game
             { "xd", ("*Laugh*", 801) },
             { "lol", ("*Laugh*", 1073) },
             { "ciao", ("*Saluta*", null) },
+            { "ok", ("*Annuisce*", null) },
             { "pd", ("*borbotta*", 605) },
         };
 
