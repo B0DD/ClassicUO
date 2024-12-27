@@ -385,6 +385,17 @@ namespace ClassicUO.Game
         public static void Say(string message, ushort hue = 0xFFFF, MessageType type = MessageType.Regular, byte font = 3)
         {
 
+            if (message.StartsWith(".sayzona", StringComparison.OrdinalIgnoreCase))
+            {
+                string zonaMessage = message.Substring(9).Trim(); // Rimuove il comando e gli spazi
+                ushort customHue = 0x0034; // Colore del messaggio (personalizzabile)
+
+                // Mostra il messaggio al centro dello schermo
+                UIManager.Add(new CenteredTextGump(zonaMessage, customHue));
+
+                return; // Interrompi ulteriori elaborazioni
+            }
+
             if (EmoteMappings.TryGetValue(message.ToLower(), out var emoteData))
             {
                 string emoteText = emoteData.EmoteText;
