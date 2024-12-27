@@ -283,7 +283,7 @@ namespace ClassicUO.Game.UI.Gumps
                         0x098D,
                         0x098D,
                         0x098D,
-                        "Xml Gumps",
+                        "Extras",
                         1,
                         true,
                         0,
