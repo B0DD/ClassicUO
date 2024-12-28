@@ -1417,7 +1417,7 @@ namespace ClassicUO.Network
 
             for (int i = 0; i < entries.Length; ++i)
             {
-                int len = Math.Min(239, entries[i].Item2.Length);
+                int len = Math.Min(2000, entries[i].Item2.Length);
 
                 writer.WriteUInt16BE(entries[i].Item1);
                 writer.WriteUInt16BE((ushort) len);
