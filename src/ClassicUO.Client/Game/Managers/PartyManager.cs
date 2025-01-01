@@ -66,7 +66,7 @@ namespace ClassicUO.Game.Managers
                     add = true;
                     goto case 2;
 
-                case 2:              
+                case 2:
                     byte count = p.ReadUInt8();
 
                     if (count <= 1)
@@ -272,7 +272,6 @@ namespace ClassicUO.Game.Managers
             }
         }
 
-
         public bool Equals(PartyMember other)
         {
             if (other == null)
@@ -284,8 +283,5 @@ namespace ClassicUO.Game.Managers
         }
 
         public uint Serial;
-
-        public int X { get; set; }
-        public int Y { get; set; }
     }
 }
