@@ -393,7 +393,7 @@ namespace ClassicUO.Game
                 // Mostra il messaggio al centro dello schermo
                 UIManager.Add(new CenteredTextGump(zonaMessage, customHue));
 
-                return; // Interrompi ulteriori elaborazioni
+                
             }
 
             if (EmoteMappings.TryGetValue(message.ToLower(), out var emoteData))

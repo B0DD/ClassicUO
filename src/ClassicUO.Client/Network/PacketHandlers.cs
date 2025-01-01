@@ -48,6 +48,7 @@ using ClassicUO.Utility.Platforms;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -986,7 +987,7 @@ namespace ClassicUO.Network
             MessageType type = (MessageType)p.ReadUInt8();
             ushort hue = p.ReadUInt16BE();
             ushort font = p.ReadUInt16BE();
-            string name = p.ReadASCII(30);
+            string name = p.ReadASCII(30).TrimEnd('\0');
             string text;
 
             if (p.Length > 44)
@@ -998,6 +999,14 @@ namespace ClassicUO.Network
             {
                 text = string.Empty;
             }
+
+            if (text.ToLower().Contains(".sayzona"))
+            {
+                
+                string processedText = text.ToLower().Replace(".sayzona", "").Trim();                
+                UIManager.Add(new CenteredTextGump($"{name}: {processedText}", hue));
+            }            
+
 
             if (
                 serial == 0
