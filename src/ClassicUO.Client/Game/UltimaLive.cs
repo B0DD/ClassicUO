@@ -659,7 +659,7 @@ namespace ClassicUO.Game
                 LoadFile(isStaticMul);
             }
 
-            protected override void Load() //loadentries here is for staticmul particular memory preloading
+            protected override void Load(bool ToDecrypt = false) //loadentries here is for staticmul particular memory preloading
             {
             }
 

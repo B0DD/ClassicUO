@@ -30,6 +30,8 @@
 
 #endregion
 
+using ClassicUO.Assets;
+
 namespace ClassicUO.IO
 {
     public class UOFileMul : UOFile
@@ -37,19 +39,24 @@ namespace ClassicUO.IO
         private readonly int _count, _patch;
         private readonly UOFileIdxMul _idxFile;
 
-        public UOFileMul(string file, string idxfile, int count, int patch = -1) : this(file)
+        public UOFileMul(string file, string idxfile, int count, int patch = -1, bool ToDecrypt = false) : this(file, ToDecrypt)
         {
             _idxFile = new UOFileIdxMul(idxfile);
             _count = count;
             _patch = patch;
+
+
         }
 
-        public UOFileMul(string file) : base(file)
+        public UOFileMul(string file, bool ToDecrypt = false) : base(file)
         {
-            Load();
+
+            Load(ToDecrypt);
         }
 
         public UOFile IdxFile => _idxFile;
+
+        
 
 
         public override void FillEntries(ref UOFileIndex[] entries)

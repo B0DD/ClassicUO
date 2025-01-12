@@ -32,18 +32,30 @@
 
 #define USE_MMF
 
+using ClassicUO.Assets;
 using ClassicUO.Utility.Logging;
 using System;
 using System.IO;
 using System.IO.MemoryMappedFiles;
+using System.Security.Cryptography;
 
 namespace ClassicUO.IO
 {
     public unsafe class UOFile : DataReader
+
+
     {
-        public UOFile(string filepath, bool loadFile = false)
+        public UOFile(string filepath, bool loadFile = false, bool ToDecrypt = false)
         {
+
             FilePath = filepath;
+
+
+            if (ToDecrypt)
+            {
+                CryptLoader = new CryptLoader();
+            }
+
 
             if (loadFile)
             {
@@ -56,8 +68,8 @@ namespace ClassicUO.IO
         protected MemoryMappedViewAccessor _accessor;
         protected MemoryMappedFile _file;
 #endif
-
-        protected virtual void Load()
+        public CryptLoader CryptLoader { get; set; } = null;
+        protected virtual void Load(bool ToDecrypt = false)
         {
             Log.Trace($"Loading file:\t\t{FilePath}");
 
@@ -70,14 +82,30 @@ namespace ClassicUO.IO
                 return;
             }
 
+
+
             long size = fileInfo.Length;
 
             if (size > 0)
             {
-#if USE_MMF
+#if USE_MMF      
+                FileStream stream = null;
+
+                
+
+                if (CryptLoader is not null && ToDecrypt)
+                {
+                     stream = CryptLoader.DecryptFileSimpleToStream(FilePath);
+                }
+                else
+                {
+                    stream = File.Open(FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                }
+
+
                 _file = MemoryMappedFile.CreateFromFile
                 (
-                    File.Open(fileInfo.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite),
+                    stream,
                     null,
                     0,
                     MemoryMappedFileAccess.Read,

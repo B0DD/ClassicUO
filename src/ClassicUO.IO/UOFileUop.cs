@@ -54,7 +54,7 @@ namespace ClassicUO.IO
         public Dictionary<ulong, UOFileIndex> Hashes => _hashes;
 
 
-        protected override void Load()
+        protected override void Load(bool ToDecrypt = false)
         {
             base.Load();
 

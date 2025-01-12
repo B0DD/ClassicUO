@@ -55,9 +55,15 @@ namespace ClassicUO.IO
 
         public abstract Task Load();
 
+        public virtual Task Load(bool ToDecrypt)
+        {
+            return Load();
+        }
+
         public virtual void ClearResources()
         {
         }
+
 
         public ref UOFileIndex GetValidRefEntry(int index)
         {

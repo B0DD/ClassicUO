@@ -59,7 +59,7 @@ namespace ClassicUO.Assets
             _instance
             ?? (_instance = new ArtLoader(MAX_STATIC_DATA_INDEX_COUNT, MAX_LAND_DATA_INDEX_COUNT));
 
-        public override Task Load()
+        public override Task Load(bool ToDecrypt= false)
         {
             return Task.Run(() =>
             {
@@ -79,7 +79,8 @@ namespace ClassicUO.Assets
 
                     if (File.Exists(filePath) && File.Exists(idxPath))
                     {
-                        _file = new UOFileMul(filePath, idxPath, MAX_STATIC_DATA_INDEX_COUNT);
+                        _file = new UOFileMul(filePath, idxPath, MAX_STATIC_DATA_INDEX_COUNT, ToDecrypt:ToDecrypt);
+
                     }
                 }
 
@@ -377,6 +378,11 @@ namespace ClassicUO.Assets
                 Width = width,
                 Height = height
             };
+        }
+
+        public override Task Load()
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -101,7 +101,7 @@ namespace ClassicUO.Assets
             {
                 AnimationsLoader.Instance.Load(),
                 AnimDataLoader.Instance.Load(),
-                ArtLoader.Instance.Load(),
+                ArtLoader.Instance.Load(true),
                 MapLoader.Instance.Load(),
                 ClilocLoader.Instance.Load(lang),
                 GumpsLoader.Instance.Load(),
