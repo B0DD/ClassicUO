@@ -48,7 +48,7 @@ namespace ClassicUO.IO
 
         }
 
-        public UOFileMul(string file, bool ToDecrypt = false) : base(file)
+        public UOFileMul(string file, bool ToDecrypt = false) : base(file,ToDecrypt:ToDecrypt)
         {
 
             Load(ToDecrypt);

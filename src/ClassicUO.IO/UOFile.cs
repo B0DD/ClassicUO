@@ -88,39 +88,50 @@ namespace ClassicUO.IO
 
             if (size > 0)
             {
-#if USE_MMF      
-                FileStream stream = null;
-
-                
-
+#if USE_MMF
                 if (CryptLoader is not null && ToDecrypt)
                 {
-                     stream = CryptLoader.DecryptFileSimpleToStream(FilePath);
+                    var mStream = CryptLoader.DecryptFileSimpleToStream(FilePath);
+
+                    //Nome a caso
+                    _file = MemoryMappedFile.CreateNew($"{Guid.NewGuid().ToString()}", mStream.Length);
+
+                    _accessor = _file.CreateViewAccessor();
+                    
+                    byte[] buffer = new byte[mStream.Length];
+                    mStream.Read(buffer, 0, buffer.Length);
+
+                    // Scrivi i dati dal buffer nel MemoryMappedFile
+                    _accessor.WriteArray(0, buffer, 0, buffer.Length);
+
+                    
                 }
                 else
                 {
-                    stream = File.Open(FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                    FileStream stream = File.Open(FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+
+                    _file = MemoryMappedFile.CreateFromFile
+                    (
+                        stream,
+                        null,
+                        0,
+                        MemoryMappedFileAccess.Read,
+                        HandleInheritability.None,
+                        false
+                    );
+
+                    _accessor = _file.CreateViewAccessor(0, size, MemoryMappedFileAccess.Read);
+
                 }
 
-
-                _file = MemoryMappedFile.CreateFromFile
-                (
-                    stream,
-                    null,
-                    0,
-                    MemoryMappedFileAccess.Read,
-                    HandleInheritability.None,
-                    false
-                );
-
-                _accessor = _file.CreateViewAccessor(0, size, MemoryMappedFileAccess.Read);
+                
 
                 byte* ptr = null;
 
                 try
                 {
                     _accessor.SafeMemoryMappedViewHandle.AcquirePointer(ref ptr);
-                    SetData(ptr, (long) _accessor.SafeMemoryMappedViewHandle.ByteLength);
+                    SetData(ptr, (long)_accessor.SafeMemoryMappedViewHandle.ByteLength);
                 }
                 catch
                 {

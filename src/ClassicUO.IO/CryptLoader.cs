@@ -47,7 +47,7 @@ namespace ClassicUO.Assets
             }
         }
 
-        public FileStream DecryptFileSimpleToStream(string inputFile)
+        public MemoryStream DecryptFileSimpleToStream(string inputFile)
         {
             using (FileStream inputFileStream = new FileStream(inputFile, FileMode.Open, FileAccess.Read))
             {
@@ -56,12 +56,12 @@ namespace ClassicUO.Assets
                     aes.Key = KeyBytes;
                     aes.IV = IVBytes;
 
-                    var Crypto = new CryptoStream(inputFileStream, aes.CreateDecryptor(), CryptoStreamMode.Read);
-
-                    FileStream fs = new FileStream("temp", FileMode.Create, FileAccess.Write);
-                    Crypto.CopyTo(fs);
-                    return fs;
-
+                    using (var crypto = new CryptoStream(inputFileStream, aes.CreateDecryptor(), CryptoStreamMode.Read))
+                    {
+                        MemoryStream fs = new MemoryStream();
+                        crypto.CopyTo(fs);
+                        return fs;
+                    }
                 }
             }
         }
