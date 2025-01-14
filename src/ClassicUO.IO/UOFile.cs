@@ -37,6 +37,7 @@ using ClassicUO.Utility.Logging;
 using System;
 using System.IO;
 using System.IO.MemoryMappedFiles;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
 namespace ClassicUO.IO
@@ -82,29 +83,22 @@ namespace ClassicUO.IO
                 return;
             }
 
-
-
             long size = fileInfo.Length;
 
             if (size > 0)
             {
 #if USE_MMF
+                long dataSize = 0;
+                byte* ptr = null;
+
                 if (CryptLoader is not null && ToDecrypt)
                 {
-                    var mStream = CryptLoader.DecryptFileSimpleToStream(FilePath);
+                    var decryptedStream = CryptLoader.DecryptFileSimpleToStream(FilePath);
+                    var buffer = decryptedStream.ToArray();
+                    GCHandle handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    ptr = (byte*)handle.AddrOfPinnedObject();
 
-                    //Nome a caso
-                    _file = MemoryMappedFile.CreateNew($"{Guid.NewGuid().ToString()}", mStream.Length);
-
-                    _accessor = _file.CreateViewAccessor();
-                    
-                    byte[] buffer = new byte[mStream.Length];
-                    mStream.Read(buffer, 0, buffer.Length);
-
-                    // Scrivi i dati dal buffer nel MemoryMappedFile
-                    _accessor.WriteArray(0, buffer, 0, buffer.Length);
-
-                    
+                    dataSize = buffer.LongLength;
                 }
                 else
                 {
@@ -121,17 +115,14 @@ namespace ClassicUO.IO
                     );
 
                     _accessor = _file.CreateViewAccessor(0, size, MemoryMappedFileAccess.Read);
+                    _accessor.SafeMemoryMappedViewHandle.AcquirePointer(ref ptr);
 
+                    dataSize = (long)_accessor.SafeMemoryMappedViewHandle.ByteLength;
                 }
-
-                
-
-                byte* ptr = null;
 
                 try
                 {
-                    _accessor.SafeMemoryMappedViewHandle.AcquirePointer(ref ptr);
-                    SetData(ptr, (long)_accessor.SafeMemoryMappedViewHandle.ByteLength);
+                    SetData(ptr, dataSize);
                 }
                 catch
                 {
